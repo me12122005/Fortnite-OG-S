@@ -8,7 +8,88 @@
 
 
 /* css - login page*/
+body{
+    background-image: url(../assets/images/fortnitebackground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 
+
+}
+#header-login-page{
+    display: flex;
+    justify-content: center;
+}
+.fortnite-logo {
+height: 50vh;
+}
+
+
+
+.Supply-Llama{
+    height: 60vh; 
+    position: fixed;
+    bottom: -320px;
+    right: -400px;
+    z-index: 0;
+}
+@keyframes llama-jump {
+    0% { transform: translateY(0) rotate(0); }
+    30% { transform: translateY(-10px) rotate(-5deg); }
+    60% { transform: translateY(5px) rotate(5deg); }
+    100% { transform: translateY(0) rotate(0); }
+}
+
+
+
+.Supply-Llama:hover {
+    animation: llama-jump 0.5s ease-in-out; 
+}
+
+.Supply-Llama:focus {
+    animation: llama-jump 1s ease-in-out; 
+    animation-fill-mode: forwards; 
+}
+
+#form-login-page{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+#email, #password{
+    opacity: 90%;
+    height: 10vh;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    width: 50vh;
+}
+#button-section{
+ display: flex;
+flex-wrap: wrap;
+   justify-content: center;
+   margin-top: 15px;
+   gap: 10px;
+}
+
+button{
+    background-color: black;
+    border-radius: 20px;
+    height: 5vh;
+    width: 40vh;
+    color: white;
+    border: none;
+  font-weight: bold;
+  font-size: 15px;
+  z-index: 1;
+}
+button:hover{
+    opacity: 50%;
+}
 
 
 
