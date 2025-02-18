@@ -1,5 +1,35 @@
 /* css - index page*/
-
+body {
+    
+    text-align: center;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    width: 100%;
+    max-width: 400px;
+}
+.game-button {
+    display: block;
+    width: 200px;
+    background-color: darkgreen;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.game-button:hover {
+    background-color: green;
+}
+.game-button:focus {
+    outline: 3px solid blue;
+}
 
 
 
