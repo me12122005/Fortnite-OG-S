@@ -1,5 +1,5 @@
 /* css - index page*/
-body {
+#index-page {
     
     text-align: center;
     font-family: Arial, sans-serif;
@@ -23,6 +23,7 @@ body {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    text-decoration: none;
 }
 .game-button:hover {
     background-color: green;
@@ -92,11 +93,11 @@ height: 50vh;
 
 #email, #password{
     opacity: 90%;
-    height: 10vh;
+    height: 5vh;
     border-radius: 20px;
     border: none;
     outline: none;
-    width: 50vh;
+    width: 25vh;
 }
 #button-section{
  display: flex;
@@ -110,7 +111,7 @@ button{
     background-color: black;
     border-radius: 20px;
     height: 5vh;
-    width: 40vh;
+    width: 20vh;
     color: white;
     border: none;
   font-weight: bold;
