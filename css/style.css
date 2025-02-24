@@ -83,7 +83,7 @@ height: 50vh;
     animation-fill-mode: forwards; 
 }
 
-#form-login-page{
+#input-section{
     display: flex;
     gap: 20px;
     justify-content: center;
@@ -92,19 +92,22 @@ height: 50vh;
 }
 
 #email, #password{
-    opacity: 90%;
+    opacity: 70%;
     height: 5vh;
     border-radius: 20px;
     border: none;
     outline: none;
     width: 25vh;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
 }
 #button-section{
  display: flex;
 flex-wrap: wrap;
    justify-content: center;
-   margin-top: 15px;
-   gap: 10px;
+   margin-top: 50px;
+   gap: 70px;
 }
 
 button{
@@ -122,7 +125,25 @@ button:hover{
     opacity: 50%;
 }
 
+@media (max-width: 800px){
+   
+    #button-section{
+          gap: 10px;
+         margin: 50px;
+       }
 
+       .Supply-Llama{
+        height: 50vh; 
+        position: fixed;
+        bottom: -220px;
+        right: -340px;
+       
+    }
+
+    .fortnite-logo {
+        height: 40vh;
+        }
+}
 
 
 
