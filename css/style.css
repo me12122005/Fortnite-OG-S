@@ -167,9 +167,176 @@ button:hover{
 
 
 /* css - detail  page*/
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
 
+.menu-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: #0000004d;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 20px auto;
+    width: 90%;
+}
 
+.menu-bar img {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
 
+.profile {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+}
+
+.search-bar {
+    flex-grow: 1;
+    padding: 8px;
+    border-radius: 15px;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+}
+
+.character-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    background: #0000004d;
+    padding: 30px;
+    border-radius: 20px;
+    width: 85%;
+    margin: 30px auto;
+}
+
+.character-info img {
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    border: 3px solid #ffffff;
+}
+
+.note-box {
+    background-color: #ffffff33;
+    padding: 10px;
+    border-radius: 12px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.note-input {
+    width: 95%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    background: #ffffff;
+    color: #000000;
+}
+
+.description-box {
+    background-color: #ffffff33;
+    padding: 15px;
+    border-radius: 12px;
+    width: 50%;
+    text-align: left;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.actions {
+    margin-top: 30px;
+}
+
+.like-button, .ban-button {
+    font-size: 35px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 15px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.like-button:hover {
+    color: #ff0000;
+    transform: scale(1.1);
+}
+
+.ban-button:hover {
+    color: #000000;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .character-details {
+        flex-direction: column;
+        width: 90%;
+        gap: 20px;
+    }
+
+    .description-box {
+        width: 90%;
+        text-align: center;
+    }
+
+    .note-box {
+        width: 90%;
+    }
+
+    .character-info img {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-bar {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .character-details {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .character-info img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .description-box {
+        width: 100%;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .note-box {
+        width: 100%;
+    }
+
+    .actions {
+        margin-top: 20px;
+    }
+}
 
 
 /* css - blacklist page*/
