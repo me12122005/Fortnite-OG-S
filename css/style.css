@@ -111,7 +111,7 @@ flex-wrap: wrap;
    gap: 70px;
 }
 
-button{
+#register-button , #login-button {
     background-color: black;
     border-radius: 20px;
     height: 5vh;
@@ -122,9 +122,11 @@ button{
   font-size: 15px;
   z-index: 1;
 }
-button:hover{
+#register-button:hover , #login-button:hover{
     opacity: 50%;
 }
+
+
 
 @media (max-width: 800px){
    
@@ -167,7 +169,7 @@ button:hover{
 
 
 /* css - detail  page*/
-body {
+#detail-page {
     font-family: Arial, sans-serif;
     text-align: center;
     color: #ffffff;
@@ -219,13 +221,14 @@ body {
     border-radius: 20px;
     width: 85%;
     margin: 30px auto;
+    border: #000000 1.5px solid;
 }
 
 .character-info img {
     width: 200px;
     height: 200px;
     border-radius: 15px;
-    border: 3px solid #ffffff;
+    border: 3px solid black;
 }
 
 .note-box {
@@ -234,6 +237,7 @@ body {
     border-radius: 12px;
     margin-top: 15px;
     width: 100%;
+    
 }
 
 .note-input {
@@ -243,8 +247,10 @@ body {
     border-radius: 8px;
     font-size: 16px;
     text-align: center;
-    background: #ffffff;
-    color: #000000;
+    background: #dbd0d000;
+    font-weight: bold;
+    outline: none;
+    color: white;
 }
 
 .description-box {
@@ -258,7 +264,10 @@ body {
 }
 
 .actions {
-    margin-top: 30px;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .like-button, .ban-button {
@@ -268,6 +277,7 @@ body {
     cursor: pointer;
     margin: 15px;
     transition: transform 0.2s ease-in-out;
+   
 }
 
 .like-button:hover {
@@ -285,6 +295,7 @@ body {
         flex-direction: column;
         width: 90%;
         gap: 20px;
+        
     }
 
     .description-box {
