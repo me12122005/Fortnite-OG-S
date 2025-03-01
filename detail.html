@@ -4,43 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
     <title>Detail</title>
 </head>
 <body id="detail-page">
 
-    <div class="menu-bar">
-        <img src="./assets/images/homeicon.png" alt="Home">
-        <img src="./assets/images/consoleicon.png" alt="Spellen">
-        <img src="./assets/images/libraryicon.png" alt="Lijst">
-        <img src="./assets/images/favoriteicon.png" alt="Favorieten">
-        <img src="./assets/images/blacklisticon.png" alt="Blacklist">
-        <input type="text" class="search-bar" placeholder="Zoeken...">
-        <img src="./assets/images/pfp.png" alt="Profiel" class="profile">
-    </div>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#"><img src="./assets/images/homeicon.png" alt="Home" draggable="false"></a></li>
+                <li><a href="#"><img src="./assets/images/consoleicon.png" alt="Spellen" draggable="false"></a></li>
+                <li><a href="#"><img src="./assets/images/libraryicon.png" alt="Lijst"></a></li>
+                <li><a href="#"><img src="./assets/images/favoriteicon.png" alt="Favorieten" draggable="false"></a></li>
+                <li><a href="#"><img src="./assets/images/blacklisticon.png" alt="Blacklist" draggable="false"></a></li>
+           
+        
+        <form id="form-search-bar" action="#" method="get">
+            <input type="text" class="search-bar" placeholder="Zoeken..." draggable="false">
+        </form>
+        <li> <a href="#" class="profile-picture"><img src="./assets/images/pfp.png" alt="Profiel" class="profile" draggable="false"> </li></a>
+    </ul>
+    </nav>
+    </header>
 
-    <div class="character-details">
-        <div class="character-info">
-            <img src="./assets/images/jonesypic.png" alt="Jonesy">
-            <div class="note-box">
-                <input type="text" class="note-input" placeholder="Eigen notitie...">
-            </div>
-        </div>
-        <div class="description-box">
+    <main class="character-details">
+        <article class="character-info">
+            <img src="./assets/images/jonesypic.png" alt="Jonesy" draggable="false">
+
+            <section class="note-box">
+                <label for="note-input">Eigen notitie:</label>
+                <textarea id="note-input" class="note-input" placeholder="Eigen notitie..."></textarea>
+            </section>
+        </article>
+
+        <section class="description-box">
             <p>
                 Jonesy is een iconisch personage in Fortnite, bekend<br>
                 om zijn verschillende verschijningen zoals Bunker Jonesy en Dark Jonesy.<br>
                 In seizoen 4 van hoofdstuk 4 werd onthuld dat Kado Thorne Bunker Jonesy martelde<br>
                 om geheimen over tijdreizen te achterhalen.
             </p>
-            <div class="actions">
-                <button class="like-button">❤️</button>
-                <button class="ban-button">🚫</button>
-            </div>
-        </div>
-    
-    </div>
 
-  
+            <section class="actions">
+                <button class="like-button" aria-label="Vind ik leuk">❤️</button>
+                <button class="ban-button" aria-label="Verbannen">🚫</button>
+            </section>
+        </section>
+    </main>
 
 </body>
 </html>

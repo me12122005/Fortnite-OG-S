@@ -1,0 +1,61 @@
+header {
+       display: flex;
+       background-color: #0000004d;
+       border-radius: 20px;
+       margin-top: 20px;
+       justify-content: center;
+       
+}
+
+
+
+
+
+
+nav ul  {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+
+}
+
+
+
+nav ul li a img {
+ height: 50px;
+
+
+}
+
+
+#form-search-bar{
+   display: flex;
+  align-items: center;
+}
+
+.search-bar {
+   outline: none;
+   padding: 12px;
+   border-radius: 10px;
+   border: none;
+   text-align: center;
+   background-color: #ffffff33;
+ 
+}
+
+.search-bar::placeholder {
+    color: white;
+    
+}
+
+
+
+
+
+
+
+@media (max-width: 480px) {
+
+
+}
