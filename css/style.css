@@ -197,13 +197,19 @@ flex-wrap: wrap;
     padding: 30px;
     border-radius: 20px;
     width: 85%;
+    height: 50rem;
     margin: 30px auto;
     border: #000000 1.5px solid;
 }
 
+.character-details p {
+    text-align: center;
+    font-size: 18px;
+   margin-top:40px ;
+}
 .character-info img {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     border-radius: 15px;
     border: 3px solid black;
 }
@@ -213,7 +219,7 @@ flex-wrap: wrap;
     padding: 10px;
     border-radius: 12px;
     margin-top: 15px;
-    width: 100%;
+    width: 250px;
     
 }
 
@@ -237,24 +243,25 @@ flex-wrap: wrap;
     padding: 15px;
     border-radius: 12px;
     width: 50%;
+    height: 20rem;
     text-align: left;
     font-size: 18px;
     line-height: 1.5;
 }
 
 .actions {
-    
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 100px;
 }
 
-.like-button, .ban-button {
-    font-size: 35px;
+.like-button, .ban-button{
+    font-size: 30px;
     border: none;
     background: none;
     cursor: pointer;
-    margin: 15px;
+    margin: 5px;
     transition: transform 0.2s ease-in-out;
    
 }
@@ -272,9 +279,8 @@ flex-wrap: wrap;
 @media (max-width: 768px) {
     .character-details {
         flex-direction: column;
-        width: 90%;
+        width: 85%;
         gap: 20px;
-        
     }
 
     .description-box {
@@ -290,35 +296,14 @@ flex-wrap: wrap;
         width: 180px;
         height: 180px;
     }
-}
-
-@media (max-width: 480px) {
-
-
-    .character-details {
-        width: 95%;
-        padding: 20px;
-    }
-
-    .character-info img {
-        width: 150px;
-        height: 150px;
-    }
-
-    .description-box {
-        width: 100%;
-        font-size: 16px;
-        text-align: center;
-    }
-
-    .note-box {
-        width: 100%;
-    }
-
-    .actions {
-        margin-top: 20px;
+    
+    .character-details p {
+       margin-top:40px ;
+       
     }
 }
+
+
 
 
 /* css - blacklist page*/
