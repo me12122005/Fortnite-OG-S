@@ -4,7 +4,7 @@ header {
        border-radius: 20px;
        margin-top: 20px;
        justify-content: center;
-       
+       padding: 10px;
 }
 
 
@@ -15,17 +15,16 @@ header {
 nav ul  {
     list-style: none;
     display: flex;
-    gap: 40px;
+    gap: 30px;
     flex-wrap: wrap;
-
+    justify-content: center;
+  
 }
 
 
 
 nav ul li a img {
  height: 50px;
-
-
 }
 
 
@@ -54,8 +53,3 @@ nav ul li a img {
 
 
 
-
-@media (max-width: 480px) {
-
-
-}
