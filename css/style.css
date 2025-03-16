@@ -114,8 +114,8 @@ flex-wrap: wrap;
 #register-button , #login-button {
     background-color: black;
     border-radius: 20px;
-    height: 5vh;
-    width: 20vh;
+    height: 40px;
+    width: 150px;
     color: white;
     border: none;
   font-weight: bold;
