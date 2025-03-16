@@ -219,12 +219,7 @@ flex-wrap: wrap;
 
 
 
-.profile {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-}
+
 
 
 
@@ -286,14 +281,14 @@ flex-wrap: wrap;
     height: 20rem;
     text-align: left;
     font-size: 18px;
-    line-height: 1.5;
+    line-height: 1;
 }
 
 .actions {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 100px;
+    gap: 40px;
 }
 
 .like-button, .ban-button{
@@ -317,9 +312,18 @@ flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {
+
+
+    .actions {
+        gap: 50px;
+    }
+    .description-box p {
+        font-size: 16px;
+        line-height: 1.2;
+           }
     .character-details {
         flex-direction: column;
-        width: 85%;
+        width: 70%;
         gap: 20px;
     }
 
@@ -343,7 +347,13 @@ flex-wrap: wrap;
     }
 }
 
+@media (min-width: 1024px){
+   .description-box p {
+font-size: 23px;
 
+   }
+  
+} 
 
 
 /* css - blacklist page*/
