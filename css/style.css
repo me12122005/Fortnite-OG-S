@@ -399,29 +399,29 @@ font-size: 23px;
 
 /* css - register page*/
 .registreren-h2{
-text-align: center;
-font-family:Arial, Helvetica, sans-serif;
-color: white;
-font-weight: bold;
-}
-#form-register{
-    display: flex;
-    gap: 20px;
-  flex-direction: column;
-  align-items: center
-
-}
-
-#form-register input{
-    opacity: 70%;
-    height: 5vh;
-    border-radius: 20px;
-    border: none;
-    outline: none;
-    width: 25vh;
     text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+    color: white;
     font-weight: bold;
-    font-size: 15px;
-}
-
+    }
+    #form-register{
+        display: flex;
+        gap: 20px;
+      flex-direction: column;
+      align-items: center
+    
+    }
+    
+    #form-register input{
+        opacity: 70%;
+        height: 5vh;
+        border-radius: 20px;
+        border: none;
+        outline: none;
+        width: 25vh;
+        text-align: center;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    
 
