@@ -171,10 +171,22 @@ flex-wrap: wrap;
     height: 335px;
     width: 15%;
 }
+.thumbs {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 55%; 
+    margin: 20px auto; 
+}
 
+.thumbs img {
+    height: 50px;
+    transition: transform 0.3s ease-in-out;
+}
 
-
-
+.thumbs img:hover {
+    transform: scale(1.1);
+}
 
 
 
