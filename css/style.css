@@ -79,10 +79,7 @@ height: 50vh;
     animation: llama-jump 0.5s ease-in-out; 
 }
 
-.Supply-Llama:focus {
-    animation: llama-jump 1s ease-in-out; 
-    animation-fill-mode: forwards; 
-}
+
 
 #input-section{
     display: flex;
