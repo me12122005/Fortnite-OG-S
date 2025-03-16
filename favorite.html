@@ -3,9 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>favoriet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <title>Favourites</title>
 </head>
-<body>
-    
+<body id="detail-page">
+
+    <header>
+        <nav id="header-login-page">
+            <ul>
+                <li><a href="index.html"><img src="assets/images/homeicon.png" alt="Home"></a></li>
+                <li><a href="game.html"><img src="assets/images/consoleicon.png" alt="Spellen"></a></li>
+                <li><a href="library.html"><img src="assets/images/libraryicon.png" alt="Lijst"></a></li>
+                <li><a href="favorite.html"><img src="assets/images/favoriteicon.png" alt="Favorieten"></a></li>
+                <li><a href="blacklist.html"><img src="assets/images/blacklisticon.png" alt="Blacklist"></a></li>
+                
+                    <form id="form-search-bar" action="search.html" method="get">
+                        <input type="text" class="search-bar" placeholder="Zoeken..." aria-label="Zoekveld">
+                    </form>
+                </li>
+                <li><a href="profile.html"><img src="assets/images/pfp.png" alt="Profiel" class="profile"></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="character-selection">
+            <h1>Favourites</h1>
+            <div class="character-details">
+
+                <article class="character-card">
+                    <a href="detail.html">
+                        <div class="character-info">
+                            <img src="assets/images/character1.png" alt="Character 1">
+                        </div>
+                    </a>
+                </article>
+
+                <article class="character-card">
+                    <a href="detail.html">
+                        <div class="character-info">
+                            <img src="assets/images/character2.png" alt="Character 2">
+                        </div>
+                    </a>
+                </article>
+
+                <article class="character-card">
+                    <a href="detail.html">
+                        <div class="character-info">
+                            <img src="assets/images/character3.png" alt="Character 3">
+                        </div>
+                    </a>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Website. Alle rechten voorbehouden.</p>  
+        </nav>
+    </footer>
+
 </body>
 </html>

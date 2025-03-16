@@ -161,7 +161,47 @@ flex-wrap: wrap;
 
 
 /* css - library page*/
+.character-selection {
+    margin-top: 30px;
+}
 
+.character-selection h1 {
+    font-size: 28px;
+    color: white;
+}
+
+
+.character-details {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    width: 85%;
+    margin: 30px auto;
+    border: #000000 1.5px solid;
+}
+
+.character-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+    width: 200px;
+}
+
+.character-card:hover {
+    transform: scale(1.05);
+}
+
+.character-info img {
+    width: 180px;
+    height: 180px;
+    border-radius: 15px;
+    border: 3px solid black;
+}
 
 
 
