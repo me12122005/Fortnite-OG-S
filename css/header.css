@@ -70,7 +70,12 @@ nav ul li:hover {
     color: white;
 }
 
-
+.profile {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+}
 .profile-picture img {
     height: 50px;
     width: 50px;
