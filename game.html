@@ -7,14 +7,23 @@
 </head>
 <body>
 
-    <div class="navbar">
-        <img src="/" alt="Home">
-        <img src="/" alt="Games">
-        <img src="/" alt="List">
-        <img src="/" alt="Favorites">
-        <input type="text" class="search" placeholder="Zoeken">
-        <img src="/" alt="User Avatar" class="avatar">
-    </div>
+    <header>
+        <nav id="header-login-page">
+            <ul>
+                <li><a href="index.html"><img src="assets/images/homeicon.png" alt="Home"></a></li>
+                <li><a href="game.html"><img src="assets/images/consoleicon.png" alt="Spellen"></a></li>
+                <li><a href="library.html"><img src="assets/images/libraryicon.png" alt="Lijst"></a></li>
+                <li><a href="favorite.html"><img src="assets/images/favoriteicon.png" alt="Favorieten"></a></li>
+                <li><a href="blacklist.html"><img src="assets/images/blacklisticon.png" alt="Blacklist"></a></li>
+                
+                    <form id="form-search-bar" action="search.html" method="get">
+                        <input type="text" class="search-bar" placeholder="Zoeken..." aria-label="Zoekveld">
+                    </form>
+                </li>
+                <li><a href="profile.html"><img src="assets/images/pfp.png" alt="Profiel" class="profile"></a></li>
+            </ul>
+        </nav>
+    </header>
 
     <div class="container">
         <div class="card">
