@@ -1,6 +1,6 @@
 footer {
-    margin-top: 50px;
-    padding: 20px;
+    margin-top: 70px;
+    padding: 30px;
     background-color: rgba(0, 0, 0, 0.3);
     text-align: center;
     color: white;
@@ -8,4 +8,5 @@ footer {
 
 footer p {
     margin: 0;
+
 }
