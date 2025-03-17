@@ -236,6 +236,10 @@ flex-wrap: wrap;
     border: 3px solid black;
 }
 
+.character img {
+height: 10rem;
+border-radius: 20px;
+}
 
 
 
