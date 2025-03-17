@@ -236,7 +236,7 @@ flex-wrap: wrap;
     border: 3px solid black;
 }
 
-.character img {
+.character  {
 height: 10rem;
 border-radius: 20px;
 }
