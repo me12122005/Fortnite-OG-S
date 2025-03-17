@@ -64,11 +64,6 @@ nav ul li a img:hover {
     transition: background-color 0.3s ease, width 0.3s ease;
 }
 
-.search-bar:focus {
-    background-color: #ffffff66;
-    width: 250px;
-}
-
 .search-bar::placeholder {
     color: white;
 }
