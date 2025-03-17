@@ -1,13 +1,8 @@
-
 header {
     display: flex;
     justify-content: center;
     padding: 10px;
-    display: flex;
-    justify-content: center;
 }
-
-
 
 nav {
     display: flex;
@@ -17,8 +12,8 @@ nav {
     padding: 10px;
     width: 90%;
     max-width: 1200px;
+    transition: background-color 0.3s ease;
 }
-
 
 nav ul {
     display: flex;
@@ -27,27 +22,30 @@ nav ul {
     gap: 15px;
     padding: 0;
     margin: 0;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     justify-content: center;
 }
-
 
 nav ul li {
     display: flex;
     align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
-
 
 nav ul li a img {
     height: 50px;
+    transition: transform 0.3s ease;
 }
-
 
 nav ul li:hover {
     background-color: rgba(204, 201, 201, 0.521);
     border-radius: 20px;
+    transform: scale(1.05);
 }
 
+nav ul li a img:hover {
+    transform: scale(1.1);
+}
 
 #form-search-bar {
     display: flex;
@@ -63,27 +61,36 @@ nav ul li:hover {
     background-color: #ffffff33;
     color: white;
     width: 200px;
+    transition: background-color 0.3s ease, width 0.3s ease;
 }
 
+.search-bar:focus {
+    background-color: #ffffff66;
+    width: 250px;
+}
 
 .search-bar::placeholder {
     color: white;
 }
-
 
 .profile-picture img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
     object-fit: cover;
+    transition: transform 0.3s ease;
 }
-@media (max-width: 425px){
+
+.profile-picture img:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 425px) {
     nav ul li a img {
         height: 40px;
     }
 
     .search-bar {
-     
         width: 230px;
     }
 }
