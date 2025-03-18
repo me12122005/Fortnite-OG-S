@@ -37,7 +37,7 @@ nav ul li a img {
     transition: transform 0.3s ease;
 }
 
-nav ul li:hover {
+nav ul li a:hover {
     background-color: rgba(204, 201, 201, 0.521);
     border-radius: 20px;
     transform: scale(1.05);

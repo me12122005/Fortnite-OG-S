@@ -1,6 +1,11 @@
+/* css - algemeen */
+h1{
+    margin-top: 2vh;
+}
+
+
 /* css - index page*/
 #index-page {
-    
     text-align: center;
     font-family: Arial, sans-serif;
     height: 100vh;
@@ -151,34 +156,43 @@ flex-wrap: wrap;
 /* css - game page*/
 .game-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-evenly;
+  
     gap: 50px;
    flex-wrap: wrap;
 }
 
 
 .game-container img {
-    width: 220px;
+    margin-top: 120px;
+    height: 20rem;
+  
     border-radius: 15px;
-    border: 3px solid black;
+    border: 3px solid black;  
+    
     
 }
 
 .thumbs {
     display: flex;
-    justify-content:space-evenly; 
+    justify-content: space-around; 
     align-items: center; 
-    width: 55%; 
-    margin: 10px auto; 
+
 }
 
-.thumbs img {
+.score {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.thumbs img, .score {
+    margin-top: 160px;
     height: 50px;
     transition: transform 0.3s ease-in-out;
 }
 
-.thumbs img:hover {
+.thumbs img:hover, .score:hover {
     transform: scale(1.1);
 }
 
@@ -200,7 +214,7 @@ flex-wrap: wrap;
 
 .character-details {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
@@ -209,6 +223,7 @@ flex-wrap: wrap;
     width: 85%;
     margin: 30px auto;
     border: #000000 1.5px solid;
+    align-items: center;
 }
 
 .character-card {
@@ -254,7 +269,7 @@ border-radius: 20px;
 
 
 
-.character-details {
+#character-details .character-details {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -268,7 +283,7 @@ border-radius: 20px;
     border: #000000 1.5px solid;
 }
 
-.character-details p {
+#character-details.character-details p {
     text-align: center;
     font-size: 18px;
    margin-top:40px ;
@@ -389,15 +404,33 @@ font-size: 23px;
 
 /* css - blacklist page*/
 
+.character-blacklist {
+    height: 50vh;
+ 
+}
 
-
-
+img.character-blacklist {
+    height: 20vh;
+ 
+}
 
 
 
 
 /* css - favorite page*/
-
+#character-details .character-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    background: #0000004d;
+    padding: 30px;
+    border-radius: 20px;
+    width: 85%;
+    height: 50rem;
+    margin: 30px auto;
+    border: #000000 1.5px solid;
+}
 
 
 
