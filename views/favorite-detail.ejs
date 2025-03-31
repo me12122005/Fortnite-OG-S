@@ -3,37 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <title>Character Details</title>
 </head>
 <body id="character-detail-page">
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html"><img src="assets/images/homeicon.png" alt="Home"></a></li>
-                <li><a href="game.html"><img src="assets/images/consoleicon.png" alt="Spellen"></a></li>
-                <li><a href="library.html"><img src="assets/images/libraryicon.png" alt="Lijst"></a></li>
-                <li><a href="favorite.html"><img src="assets/images/favoriteicon.png" alt="Favorieten"></a></li>
-                <li><a href="blacklist.html"><img src="assets/images/blacklisticon.png" alt="Blacklist"></a></li>
-                <li>
-                    <form id="form-search-bar" action="search.html" method="get">
-                        <input type="text" class="search-bar" placeholder="Zoeken..." aria-label="Zoekveld">
-                    </form>
-                </li>
-                <li><a href="profile.html"><img src="assets/images/pfp.png" alt="Profiel" class="profile"></a></li>
-            </ul>
-        </nav>
-    </header>
+    <%- include ("partials/header") %>
 
     <main>
         <article class="character-detail">
             <header>
                 <h1>Character Details</h1>
                 <section class="character-info">
-                    <img src="assets/images/character1.png" alt="Character 1" id="character-image">
+                    <img src="/assets/images/character1.png" alt="Character 1" id="character-image">
                     <p id="character-name">Character 1</p>
                 </section>
             </header>
@@ -55,14 +39,14 @@
             <section class="selection">
                 <h2>Select Weapon</h2>
                 <ul class="weapons">
-                    <li><img src="assets/images/weapon1.png" alt="Weapon 1" ></li>
-                    <li><img src="assets/images/questionmark.png" alt="Weapon 2" ></li>
+                    <li><img src="/assets/images/weapon1.png" alt="Weapon 1" ></li>
+                    <li><img src="/assets/images/questionmark.png" alt="Weapon 2" ></li>
                 </ul>
 
                 <h2>Select Emote</h2>
                 <ul class="emotes">
-                    <li><img src="assets/images/emote1.png" alt="Emote 1" ></li>
-                    <li><img src="assets/images/questionmark.png" alt="Emote 2" ></li>
+                    <li><img src="/assets/images/emote1.png" alt="Emote 1" ></li>
+                    <li><img src="/assets/images/questionmark.png" alt="Emote 2" ></li>
                 </ul>
             </section>
 
