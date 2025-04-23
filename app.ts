@@ -32,6 +32,11 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
+app.get("/detail", (req, res) => {
+  res.render("detail");
+});
+
+
 app.listen(app.get("port"), () =>
   console.log("[server] http://localhost:" + app.get("port"))
 );
