@@ -14,29 +14,38 @@
 
 
     <main>
+
+        <form action="/library" method="post">
+
+            <label for="name">karakter naam</label>
+            <input name="name" id="name" placeholder="naam" type="text">
+            
+            <select name="rarity" id="rarity">
+                <option value="">kies een zeldzaamheid</option>
+                <option value="common">Gewoon</option>
+                <option value="rare">Zeldzaam</option>
+                <option value="epic">Episch</option>
+                <option value="legendary">legendarisch</option>
+            </select>
+            
+            <button type="submit">Filter</button>
+        </form>
+
         <section class="character-selection">
             <h1>Karakters</h1>
             <section class="character-details">
 
-                <article class="character-card">
-                    <a href="detail">
-                        <img src="/assets/images/jonesypic.png" alt="Character 1" class="character">
-                    </a>
-                </article>
-
-         
-                <article class="character-card">
-                    <a href="detail">
-                        <img src="/assets/images/jonesypic.png" alt="Character 2" class="character">
-                    </a>
-                </article>
-
-               
-                <article class="character-card">
-                    <a href="detail">
-                        <img src="/assets/images/jonesypic.png" alt="Character 3" class="character">
-                    </a>
-                </article>
+                <% if (data.data == null) { %>
+                    <p>Geen karakters gevonden.</p>
+                <% } else { %>
+                    <% data.data.forEach(character => { %>
+                    <article class="character-card">
+                        <a href="detail">
+                            <img src="<%= character.images.icon %>" alt="<%= character.name %>" class="character">
+                        </a>
+                    </article>
+                    <% }); %>
+                <% } %>
 
             </section>
         </section>
