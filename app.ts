@@ -50,11 +50,16 @@ app.get("/blacklist", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
+  
   res.render("login");
 });
 
-app.get("/detail", (req, res) => {
-  res.render("detail");
+app.get("/detail", async(req, res) => {
+  let name = req.query.id;
+  const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
+  const data = await response.json();
+
+  res.render("detail", {data});
 });
 
 

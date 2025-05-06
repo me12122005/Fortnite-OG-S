@@ -14,7 +14,7 @@
 
     <main class="character-details">
         <article class="character-info">
-            <img src="/assets/images/jonesypic.png" alt="Jonesy" draggable="false">
+            <img src="<%= data.data[0].images.icon %>" alt="<%= data.data[0].name %>" class="character" draggable="false">
 
             <section class="note-box">
                 <label for="note-input">Eigen notitie:</label>
@@ -25,10 +25,7 @@
 
         <section class="description-box">
             <p>
-                Jonesy is een iconisch personage in Fortnite, bekend<br>
-                om zijn verschillende verschijningen zoals Bunker Jonesy en Dark Jonesy.<br>
-                In seizoen 4 van hoofdstuk 4 werd onthuld dat Kado Thorne Bunker Jonesy martelde<br>
-                om geheimen over tijdreizen te achterhalen.
+                <%= data.data[0].description %>
             </p>
 
             <section class="actions">
@@ -37,10 +34,5 @@
             </section>
         </section>
     </main>
-
-    <footer>
-      
-    </footer>
-
 </body>
 </html>

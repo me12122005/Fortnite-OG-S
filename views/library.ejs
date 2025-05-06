@@ -40,7 +40,7 @@
                 <% } else { %>
                     <% data.data.forEach(character => { %>
                     <article class="character-card">
-                        <a href="detail">
+                        <a href="detail?id=<%= character.name %>">
                             <img src="<%= character.images.icon %>" alt="<%= character.name %>" class="character">
                         </a>
                     </article>
