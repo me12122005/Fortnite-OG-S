@@ -330,9 +330,9 @@ flex-wrap: wrap;
 
 
 .character-details {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  
+ 
+ 
     gap: 20px;
     padding: 20px;
     background: rgba(0, 0, 0, 0.3);
@@ -374,149 +374,130 @@ border-radius: 20px;
 /* css - detail  page*/
 #detail-page {
     font-family: Arial, sans-serif;
-    text-align: center;
-    color: #ffffff;
-    margin: 0;
-    padding: 0;
-}
-
-
-
-
-
-
-
-#character-details .character-details {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    background: #0000004d;
-    padding: 30px;
-    border-radius: 20px;
-    width: 85%;
-    height: 50rem;
-    margin: 30px auto;
-    border: #000000 1.5px solid;
-}
-
-#character-details.character-details p {
-    text-align: center;
-    font-size: 18px;
-   margin-top:40px ;
-}
-.character-info img {
-    width: 250px;
-    height: 250px;
-    border-radius: 15px;
-    border: 3px solid black;
-}
-
-.note-box {
-    background-color: #ffffff33;
-    padding: 10px;
-    border-radius: 12px;
-    margin-top: 15px;
-    width: 250px;
+    color: #f9f9f9;
+    font-size: 15px;
+    font-weight: bold;
     
 }
 
+
+.character-details-page {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px;
+    align-items: center;
+    background-color:#273c4493;
+    border-radius: 20px;
+  border: solid black 1px;
+}
+
+
+.character-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+
+.character-info img {
+    border-radius: 12px;
+    display: block;
+    margin: auto ;
+}
+
+
+.note-box {
+    background-color: #ffffff33;
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+   
+}
+.note-label{
+    margin-bottom: 10px ;
+}
 .note-input {
-    width: 95%;
     padding: 8px;
     border: none;
-    border-radius: 8px;
+    border-radius: 25px;
     font-size: 16px;
-    text-align: center;
-    background: #dbd0d000;
+    background: transparent;
     font-weight: bold;
     outline: none;
     color: white;
+    text-align: center;
+    background-color: #ffffff33;
 }
-.note-input::placeholder{
+
+.note-input::placeholder {
     color: white;
 }
+
+
 .description-box {
-    background-color: #ffffff33;
-    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    width: 50%;
-    height: 20rem;
-    text-align: left;
-    font-size: 18px;
-    line-height: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .actions {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
+    justify-content: space-around;
+    gap: 21px;
 }
 
-.like-button, .ban-button{
+.like-button,
+.ban-button {
     font-size: 30px;
     border: none;
     background: none;
     cursor: pointer;
-    margin: 5px;
     transition: transform 0.2s ease-in-out;
-   
 }
 
-.like-button:hover {
-    color: #ff0000;
+.like-button:hover, .ban-button:hover {
     transform: scale(1.1);
 }
 
-.ban-button:hover {
-    color: #000000;
-    transform: scale(1.1);
-}
-
-@media (max-width: 768px) {
 
 
-    .actions {
-        gap: 50px;
+@media (min-width: 1024px) {
+    .character-details-page {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
     }
-    .description-box p {
-        font-size: 16px;
-        line-height: 1.2;
-           }
-    .character-details {
-        flex-direction: column;
-        width: 70%;
-        gap: 20px;
-    }
+
+
 
     .description-box {
-        width: 90%;
-        text-align: center;
+        align-self: stretch;
+        justify-content: space-between;
+        flex-grow: 1;
     }
 
-    .note-box {
-        width: 90%;
-    }
+    .like-button,
+    .ban-button {
+        font-size: 50px; }
 
-    .character-info img {
-        width: 180px;
-        height: 180px;
-    }
-    
-    .character-details p {
-       margin-top:40px ;
-       
-    }
+        #detail-page {
+            font-size: 20px;
+         
+        }
+        .character-details-page {
+          width: 90%;
+          margin: auto;
+        }
+        
 }
 
-@media (min-width: 1024px){
-   .description-box p {
-font-size: 23px;
-
-   }
-  
-} 
 
 
 /* css - blacklist page*/

@@ -12,13 +12,13 @@
 
     <%- include ("partials/header") %>
 
-    <main class="character-details">
+    <main class="character-details-page">
         <article class="character-info">
             <img src="<%= data.data[0].images.icon %>" alt="<%= data.data[0].name %>" class="character" draggable="false">
 
             <section class="note-box">
-                <label for="note-input">Eigen notitie:</label>
-                <input type="text" id="note-input" class="note-input" placeholder="Eigen notitie...">
+                <label for="note-input" class="note-label">Eigen notitie:</label>
+                <input type="text" id="note-input" class="note-input" placeholder="Schrijf...">
                 
             </section>
         </article>
