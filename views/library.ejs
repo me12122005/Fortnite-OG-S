@@ -15,10 +15,9 @@
 
     <main>
 
-        <form action="/library" method="post">
+        <form action="/library" method="post" id="character-form"> 
 
-            <label for="name">karakter naam</label>
-            <input name="name" id="name" placeholder="naam" type="text">
+            <input name="name" id="name" placeholder="zoek je character" type="text">
             
             <select name="rarity" id="rarity">
                 <option value="">kies een zeldzaamheid</option>
@@ -28,7 +27,7 @@
                 <option value="legendary">legendarisch</option>
             </select>
             
-            <button type="submit">Filter</button>
+            <button type="submit" id="search-character-button">zoeken</button>
         </form>
 
         <section class="character-selection">

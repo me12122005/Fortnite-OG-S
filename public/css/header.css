@@ -52,23 +52,6 @@ nav ul li a img:hover {
     align-items: center;
 }
 
-.search-bar {
-    outline: none;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    text-align: center;
-    background-color: #ffffff33;
-    color: white;
-    width: 200px;
-    transition: background-color 0.3s ease, width 0.3s ease;
-}
-
-.search-bar::placeholder {
-    color: white;
-}
-
-
 .profile {
     width: 45px;
     height: 45px;

@@ -320,37 +320,39 @@ flex-wrap: wrap;
 
 /* css - library page*/
 .character-selection {
-    margin-top: 30px;
+    margin-top: 60px;
+
+
 }
 
 .character-selection h1 {
     font-size: 28px;
     color: white;
+    text-align: center;
 }
 
 
 .character-details {
-  
- 
- 
-    gap: 20px;
+    gap: 30px;
     padding: 20px;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 20px;
-    width: 85%;
     margin: 30px auto;
     border: #000000 1.5px solid;
-    align-items: center;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
 }
 
 .character-card {
     background-color: rgba(255, 255, 255, 0.1);
-    padding: 15px;
+    padding: 2.5px;
     border-radius: 10px;
     transition: transform 0.3s ease-in-out;
-    width: 200px;
 }
-
+.character-card img {
+    height: 20vh;
+}
 .character-card:hover {
     transform: scale(1.05);
 }
@@ -367,7 +369,76 @@ height: 10rem;
 border-radius: 20px;
 }
 
+#name {
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    background-color: #ffffff33;
+    color: white;
+    width: 200px;
+    font-weight: bold;
+    font-size: 15px;
+}
 
+#name::placeholder {
+    color: white;
+}
+
+#character-form{
+    display: flex;
+  flex-wrap: wrap;
+   margin-top: 30px;
+   gap: 15px;
+justify-content: center;
+}
+ #rarity{
+   background-color: #ffffff33 ;
+   border: none;
+   border-radius: 5px;
+   color: white;
+   font-weight: bold;
+   outline: none;
+   font-size: 15px;
+   padding: 15px;
+}
+#rarity option{
+    background-color: #14dde3 ;
+  color: rgb(0, 0, 0);
+font-weight: bold;
+color: rgb(3, 8, 47);
+font-size: 15px;
+
+}
+
+#search-character-button{
+ border-radius: 10px;
+ outline: none;
+ padding: 15px;
+ border:none;
+ box-shadow: 1px 1px 1px 1px 1px rgb(3, 106, 251);
+ background-color: #ffffff33; 
+font-weight: bold;
+color: white;
+transition: transform 0.3s ease-in-out;
+cursor: pointer;
+}
+#search-character-button:hover{
+    transform: scale(1.05);
+}
+@media (min-width: 1024px) {
+
+    
+.character-details {
+    width: 90%;
+}
+
+    .character-card img {
+        height: 25vh;
+    }
+        
+}
 
 
 
