@@ -1,12 +1,40 @@
 import express from "express";
+import { Collection, MongoClient } from "mongodb";  
+import { User, Favorite, Blacklist } from "./interfaces/types";
+import bcrypt from 'bcrypt';
 
 const app = express();
 
-app.set("port", 3000);
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended:true}))
 app.set('view engine', 'ejs');
+
+const uri = "mongodb+srv://s154672:FortniteOGSpswd@fortniteogs.nl0tmqx.mongodb.net/"; 
+const client = new MongoClient(uri);
+const collection : Collection<User> = client.db("FortniteOGS").collection<User>("Users");
+
+async function connect(){
+    try {
+        await client.connect();
+        console.log("Connected to database");
+        process.on("SIGINT", exit);
+    } catch (error) {
+        console.error(error);
+    } 
+}
+
+async function exit() {
+    try {
+        await client.close();
+        console.log("Disconnected from database");
+    } catch (error) {
+        console.error(error);
+    }
+    process.exit(0);
+}
+
+
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -54,6 +82,29 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
+app.get("/register", (req, res) => {
+  
+  res.render("register");
+});
+
+app.post("/register", async (req, res) => {
+    const {  name, email, password } = req.body;
+    if (await collection.findOne({ email })) {
+        return res.render("register", { error: "Email bestaat al" });
+    }
+    else {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await collection.insertOne({
+        name,
+        email,
+        password: hashedPassword,
+        favorite : [],
+        blacklist: [],
+     });
+    }
+  res.redirect("/login");
+});
+
 app.get("/detail", async(req, res) => {
   let name = req.query.id;
   const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
@@ -63,6 +114,7 @@ app.get("/detail", async(req, res) => {
 });
 
 
-app.listen(app.get("port"), () =>
-  console.log("[server] http://localhost:" + app.get("port"))
-);
+app.listen(3000, async() => {
+    await connect();
+    console.log("Server is running on port 3000");
+});
