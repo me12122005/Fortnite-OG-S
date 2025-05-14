@@ -68,13 +68,21 @@ app.post("/library", async(req, res) => {
   if (rarity == "") {
     const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
     const data = await response.json();
-    console.log(data)
     res.render("library", {data});
   }
 });
 
-app.get("/blacklist", (req, res) => {
-  res.render("blacklist");
+app.get("/blacklist", async(req, res) => {
+  let user = await collection.findOne({ name: 'test' });  //test moet veranderd worden naar session id 
+  console.log(user)
+  let data : any[] = [];
+  user?.blacklist.forEach(async element=> {
+    let skin = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${element}`);
+    console.log(skin)
+    data.push(skin)
+  });
+  console.log(data);
+  res.render("blacklist", {data});
 });
 
 app.get("/login", (req, res) => {
@@ -113,11 +121,14 @@ app.get("/detail", async(req, res) => {
   res.render("detail", {data});
 });
 
-app.post("verbannen", async(req, res) => {
+app.post("/verbannen", async(req, res) => {
   let name = req.body.name;
-  let message = prompt("waarom wil je deze skin blacklisten");
+  //let message = prompt("waarom wil je deze skin blacklisten");
   console.log(name);
-  console.log(message);
+  //console.log(message);
+  collection.updateOne({ name: "test" }, { $push: { blacklist: name } }); //testing naam moet veranderd worden naar session dinge !!!!!
+  res.redirect("library")
+   
 });
 
 

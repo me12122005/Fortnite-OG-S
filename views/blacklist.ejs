@@ -18,32 +18,17 @@
             <h1>Blacklist</h1>
             <section class="character-details">
 
-                <article class="character-card">
-                    <a href="detail.html">
-                        <img src="/assets/images/jonesypic.png" alt="Character 1" class="character">
-                       
-                    </a>
-                    <figcaption><p>Naam: Jonesy</p>
-                        <p>Reden: Lelijke skin</p></figcaption>
-                </article>
-
-         
-                <article class="character-card">
-                    <a href="detail.html">
-                        <img src="/assets/images/jonesypic.png" alt="Character 2" class="character">
-                    </a>
-                    <figcaption><p>Naam: Jonesy</p>
-                        <p>Reden: Lelijke skin</p></figcaption>
-                </article>
-
-               
-                <article class="character-card">
-                    <a href="detail.html">
-                        <img src="/assets/images/jonesypic.png" alt="Character 3" class="character">
-                    </a>
-                    <figcaption><p>Naam: Jonesy</p>
-                        <p>Reden: Lelijke skin</p></figcaption>
-                </article>
+                 <% if (data.data == null) { %>
+                    <p>Geen karakters gevonden.</p>
+                <% } else { %>
+                    <% data.forEach(character => { %>
+                    <article class="character-card">
+                        <a href="detail?id=<%= character.name %>">
+                            <img src="<%= character.images.icon %>" alt="<%= character.name %>" class="character">
+                        </a>
+                    </article>
+                    <% }); %>
+                <% } %>
         </section>
     </main>
 
