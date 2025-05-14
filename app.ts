@@ -1,7 +1,7 @@
 import express from "express";
 import { Collection, MongoClient } from "mongodb";  
 import { User, Favorite, Blacklist } from "./interfaces/types";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 
 const app = express();
 
@@ -111,6 +111,13 @@ app.get("/detail", async(req, res) => {
   const data = await response.json();
 
   res.render("detail", {data});
+});
+
+app.post("verbannen", async(req, res) => {
+  let name = req.body.name;
+  let message = prompt("waarom wil je deze skin blacklisten");
+  console.log(name);
+  console.log(message);
 });
 
 
