@@ -568,10 +568,58 @@ cursor: pointer;
         }
         
 }
-
-#weapons{
-  
+/* css - selection page*/
+.weapons{
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 5rem;
 }
+.weapons img {
+     height: 30vh;
+     background-color: rgba(255, 255, 255, 0.1);
+     padding: 2.5px;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.weapons img:hover{
+    transform: scale(1.05);
+}
+
+#character-name{
+    
+text-align: center;
+}
+
+.selection h2{
+    text-align: center;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    margin-top: 50px;
+   margin-bottom: 50px;
+}
+
+.character-selection-page {
+      width: 300px;
+    height:300px;
+    border-radius: 50px;
+    border: 3px solid black;
+}
+
+.character-info-selection {  
+   display: flex; 
+ flex-direction: column;
+justify-self: center;
+}
+
+.character-info-selection h1, #character-name{
+  text-align: center;
+}
+
 
 
 /* css - blacklist page*/

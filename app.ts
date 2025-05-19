@@ -2,6 +2,7 @@ import express from "express";
 import { Collection, MongoClient } from "mongodb";
 import { User, Favorite, Blacklist } from "./interfaces/types";
 import bcrypt from "bcrypt";
+import e from "express";
 
 const app = express();
 
@@ -117,7 +118,7 @@ app.get("/detail", async (req, res) => {
   let name = req.query.id;
   const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
   const data = await response.json();
-
+  console.log(data)
   res.render("detail", { data });
 });
 
@@ -127,9 +128,15 @@ app.post("verbannen", async (req, res) => {
   console.log(name);
   console.log(message);
 });
-
+app.get("/selection/:id", async (req, res) => {
+  const id = req.params.id;
+  const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
+  const emotedate = await response.json();
+  console.log(emotedate)
+  res.render("selection", { emotedate });
+});
 app.post("selection", async (req, res) => {
-  let name: string = req.body.name;
+
 });
 app.listen(3000, async () => {
   await connect();

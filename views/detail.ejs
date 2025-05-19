@@ -29,8 +29,9 @@
             </p>
 
             <section class="actions">
-                <form action="vind-ik-leuk">
-                <a class="like-button" aria-label="Vind ik leuk" href="selection?id=<%= data.data[0].name %>">❤️</a>
+                <form action="selection">
+                      <input type="hidden" name="id" value="<%= data.data[0].name %>">
+                <button class="like-button" aria-label="Vind ik leuk">❤️</button>
                 </form>
                 <form action="verbannen">
                     <input type="hidden" name="name" value="<%= data.data[0].name %>">
