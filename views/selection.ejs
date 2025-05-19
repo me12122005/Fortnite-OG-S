@@ -17,19 +17,19 @@
             <header>
                 <h1>Character</h1>
                 <section class="character-info">
-                    <img src="data.data[0].images.icon" alt="<%= data.data[0].name %>" class="character">
+                    <img src="<%= data.data[0].images.icon %>" alt="<%= data.data[0].name %>" class="character" draggable="false">
                     <p id="character-name">Character 1</p>
                 </section>
             </header>
 
             <section class="description-box">
                 <p>
-                
+                <%= data.data[0].description %>
                 </p>
 
 
             <section class="selection">
-                <h2>Select Weapon</h2>
+                <h2>kies je wapen</h2>
                 <ul class="weapons">
                     <li><img src="/assets/images/Assault_Rifle.webp" alt="Assault_Rifle" ></li>
                     <li><img src="/assets/images/Mythic_Goldfish.webp" alt="Mythic_Goldfish" ></li>
@@ -38,7 +38,7 @@
                     <li><img src="/assets/images/Pump_Shotgun.webp" alt="Pump_Shotgun"></li>
                 </ul>
 
-                <h2>Select Emote</h2>
+                <h2>kies je emote</h2>
                 <ul class="emotes">
                     <li><img src="/assets/images/emote1.png" alt="Emote 1" ></li>
                     <li><img src="/assets/images/questionmark.png" alt="Emote 2" ></li>
@@ -46,8 +46,8 @@
             </section>
 
             <section id="selection-result">
-                <p>Selected Weapon: <span id="selected-weapon">None</span></p>
-                <p>Selected Emote: <span id="selected-emote">None</span></p>
+                <p>Geselecteerdde wapens: <span id="selected-weapon">None</span></p>
+                <p>Geselecteerdde emote: <span id="selected-emote">None</span></p>
             </section>
         </article>
     </main>

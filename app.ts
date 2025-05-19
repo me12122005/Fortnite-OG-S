@@ -54,7 +54,6 @@ app.get("/selection", async (req, res) => {
   let name = req.query.id;
   const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
   const data = await response.json();
-  console.log(data.data[0]);
   res.render("selection", { data });
 });
 
@@ -129,7 +128,9 @@ app.post("verbannen", async (req, res) => {
   console.log(message);
 });
 
-
+app.post("selection", async (req, res) => {
+  let name: string = req.body.name;
+});
 app.listen(3000, async () => {
   await connect();
   console.log("Server is running on port 3000");
