@@ -74,14 +74,17 @@ app.post("/library", async(req, res) => {
 
 app.get("/blacklist", async(req, res) => {
   let user = await collection.findOne({ name: 'test' });  //test moet veranderd worden naar session id 
-  console.log(user)
   let data : any[] = [];
-  user?.blacklist.forEach(async element=> {
-    let skin = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${element}`);
-    console.log(skin)
-    data.push(skin)
-  });
-  console.log(data);
+ 
+  if (user?.blacklist) {
+    for (const element of user.blacklist) {
+      let response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${element}`);
+      let skin = await response.json();
+      data.push(skin.data[0]);
+    }
+    
+  }
+
   res.render("blacklist", {data});
 });
 
