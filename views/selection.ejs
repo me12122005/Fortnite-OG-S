@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
-    <title>Character Details</title>
+    <title>Selectie</title>
 </head>
-<body id="character-detail-page">
+<body >
 
     <%- include ("partials/header") %>
-            <main class="character-details-page">
+            <main class="selection-page">
                  <section class="character-info-selection">
-                    <h1>Character</h1>
+                    <h1>Karakter</h1>
                     <img src="<%= data.data[0].images.icon %>" alt="<%= data.data[0].name %>" class="character-selection-page" draggable="false">
                     <p id="character-name"><%= data.data[0].name %></p>
                     <p>
@@ -31,13 +31,17 @@
                     <li><img src="/assets/images/Pump_Shotgun.webp" alt="Pump_Shotgun"></li>
                     <li><img src="/assets/images/Sniper_Rifle.webp" alt="Sniper_Rifle"></li>
                 </ul>
-
-                <h2>kies je emote</h2>
-                <ul class="emotes">
-                    <li><img src="<%= emotedate.data[0].images.icon %>" alt=""></li>
-                </ul>
-          
-
+                 <h2>kies je emote</h2>
+            </section>
+            <section class="emote">
+    <% emotes.forEach(emote => { %>
+      
+        <img src="<%= emote.images.icon %>" alt="<%= emote.name %>" class="emote-images" >
+            
+         <% }) %>
+         <h3>lol</h3>
+         </section>
+             
             <section id="selection-result">
                 <p>Geselecteerdde wapens: <span id="selected-weapon">None</span></p>
                 <p>Geselecteerdde emote: <span id="selected-emote">None</span></p>

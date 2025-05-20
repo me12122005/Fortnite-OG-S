@@ -576,16 +576,29 @@ cursor: pointer;
   justify-content: space-around;
   gap: 5rem;
 }
-.weapons img {
-     height: 30vh;
+.selection-page{
+    background-color:#273c4493;
+    border-radius: 20px;
+   border: solid black 1px;
+}
+.emote{
+    display: flex;
+    justify-content: space-around;
+ flex-wrap: wrap;
+   gap: 5rem;
+}
+
+
+.weapons img, .emote-images{
+     height: 40vh;
      background-color: rgba(255, 255, 255, 0.1);
      padding: 2.5px;
-    border-radius: 10px;
+      border-radius: 10px;
     transition: transform 0.3s ease-in-out;
     cursor: pointer;
 }
 
-.weapons img:hover{
+.weapons img:hover, .emote-images:hover{
     transform: scale(1.05);
 }
 
@@ -620,6 +633,45 @@ justify-self: center;
   text-align: center;
 }
 
+@media (min-width: 1024px) {
+
+    
+.selection-page {
+    width: 90%;
+    margin: auto;
+}
+
+    .character-card img {
+        height: 25vh;
+    }
+        
+}
+
+
+@media (min-width: 1024px) {
+    .selection-page {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+
+
+
+    .like-button,
+    .ban-button {
+        font-size: 50px; }
+
+        #detail-page {
+            font-size: 20px;
+         
+        }
+        .character-details-page {
+          width: 90%;
+          margin: auto;
+        }
+        
+}
 
 
 /* css - blacklist page*/
