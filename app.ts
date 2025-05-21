@@ -1,6 +1,7 @@
 import express from "express";
 import { Collection, MongoClient } from "mongodb";  
 import { User, Favorite, Blacklist } from "./interfaces/types";
+import session from "express-session";
 import bcrypt from "bcrypt";
 
 const app = express();
@@ -9,6 +10,16 @@ app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended:true}))
 app.set('view engine', 'ejs');
+app.use(session({
+    secret: "secret-key",
+    resave: false,
+    saveUninitialized: true,
+}));
+declare module "express-session" {
+    interface SessionData {
+      userId: string;
+    }
+}
 
 const uri = "mongodb+srv://s154672:FortniteOGSpswd@fortniteogs.nl0tmqx.mongodb.net/"; 
 const client = new MongoClient(uri);
@@ -89,8 +100,17 @@ app.get("/blacklist", async(req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  
   res.render("login");
+});
+
+app.post("/login", async(req, res) => {
+   let { email, password } = req.body;
+    let user = await collection.findOne({ email });
+
+    if (user && await bcrypt.compare(password, user.password)) {
+        req.session.userId = user.name;
+    }
+    res.redirect("game"); 
 });
 
 app.get("/register", (req, res) => {
@@ -101,7 +121,7 @@ app.get("/register", (req, res) => {
 app.post("/register", async (req, res) => {
     const {  name, email, password } = req.body;
     if (await collection.findOne({ email })) {
-        return res.render("register", { error: "Email bestaat al" });
+        // return res.render("register", { error: "Email bestaat al" });  !!!!! aanpassen in de ejs van register
     }
     else {
         const hashedPassword = await bcrypt.hash(password, 10);
