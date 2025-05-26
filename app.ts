@@ -1,8 +1,8 @@
-import express from "express";
+import express, { response } from "express";
 import session from "express-session";
 import { Collection, MongoClient, ObjectId } from "mongodb";
 import bcrypt from "bcrypt";
-import { User, Favorite } from "./interfaces/types";
+import { User } from "./interfaces/types";
 
 const app = express();
 
@@ -54,8 +54,6 @@ async function exit() {
   }
   process.exit(0);
 }
-
-
 
 
 app.get("/", (req, res) => {
@@ -258,48 +256,58 @@ app.get("/detail", async (req, res) => {
 
 app.get("/blacklist", async (req, res) => {
   const userId = req.session.userId;
-  if (!userId) {
-    return res.redirect("/login");
-  }
+  if (!userId) return res.redirect("/login");
+
   const user = await collection.findOne({ _id: new ObjectId(userId) });
-  if (!user) {
-    return res.redirect("/login");
-  }
+  if (!user) return res.redirect("/login");
 
-  const data: any[] = [];
+  const charactersWithNotes: any[] = [];
 
-  for (const skinName of user.blacklist || []) {
-    try {
-      const response = await fetch(
-        `https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${skinName}`
-      );
-      const skin = await response.json();
-      if (skin?.data) {
-        data.push(skin.data);
-      }
-    } catch (error) {
-      console.error(error);
+  for (const blacklistedItem of user.blacklist || []) {
+    const skinName = blacklistedItem.name;
+    const note = blacklistedItem.note || "";
+
+    const url = `https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${skinName}`;
+    const response = await fetch(url);
+    const json = await response.json();
+
+    if (json?.data?.length) {
+      const character = json.data[0];
+      character.note = note;
+      charactersWithNotes.push(character);
     }
   }
 
-  res.render("blacklist", { data });
+  res.render("blacklist", { data: { data: charactersWithNotes } });
 });
+
 
 app.post("/verbannen", async (req, res) => {
   const userId = req.session.userId;
   if (!userId) return res.redirect("/login");
 
-  const { name } = req.body;
+  const { name, note } = req.body;
   if (!name) return res.redirect("/blacklist");
 
-  await collection.updateOne(
-    { _id: new ObjectId(userId), "blacklist": { $ne: name } },
-    { $push: { blacklist: name } }
-  );
+  const user = await collection.findOne({ _id: new ObjectId(userId) });
+  if (!user) return res.redirect("/login");
+
+  const exists = user.blacklist?.some(item => item.name === name);
+  if (!exists) {
+    await collection.updateOne(
+      { _id: new ObjectId(userId) },
+      { $push: { blacklist: { name, note: note || "" } } }
+    );
+  } else {
+
+    await collection.updateOne(
+      { _id: new ObjectId(userId), "blacklist.name": name },
+      { $set: { "blacklist.$.note": note || "" } }
+    );
+  }
 
   res.redirect("/blacklist");
 });
-
 
 
 app.listen(3000, async () => {

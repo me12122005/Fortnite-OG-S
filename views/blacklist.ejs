@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/footer.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
     <title>Blacklist</title>
 </head>
 <body id="detail-page">
 
-    <%- include ("partials/header") %>
+    <%- include("partials/header") %>
 
     <main>
-       
         <section class="character-selection">
             <h1>Blacklist</h1>
             <section class="character-details">
-
-                 <% if (data == null) { %>
-                    <p>Geen karakters gevonden.</p>
+                <% if (data && data.data && data.data.length > 0) { %>
+                    <% data.data.forEach(character => { %>
+                        <article class="character-card">
+                            <a href="detail?id=<%= character.name %>">
+                                <img 
+                                    src="<%= character.images && character.images.icon ? character.images.icon : '/images/default.png' %>" 
+                                    alt="<%= character.name %>" 
+                                    class="character" 
+                                />
+                            </a>
+                            <% if (character.note && character.note.trim() !== "") { %>
+                                <p class="note">Notitie: <%= character.note %></p>
+                            <% } %>
+                        </article>
+                    <% }) %>
                 <% } else { %>
-                    <% data.forEach(character => { %>
-                    <article class="character-card">
-                        <a href="detail?id=<%= character.name %>">
-                            <img src="<%= character.images.icon %>" alt="<%= character.name %>" class="character">
-                        </a>
-                    </article>
-                    <% }); %>
+                    <p>Geen karakters geblacklist.</p>
                 <% } %>
+            </section>
         </section>
     </main>
 
-    <footer>
-     
-    </footer>
+    <footer></footer>
 
 </body>
 </html>

@@ -7,6 +7,7 @@ export interface Favorite {
 
 export interface Blacklist {
   name: string;
+  note: string;
 }
 
 export interface User {
@@ -15,5 +16,5 @@ export interface User {
   email: string;
   password: string;
   favorite: Favorite[];
-  blacklist: string[];
+  blacklist: Blacklist[];
 }
