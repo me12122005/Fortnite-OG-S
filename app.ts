@@ -17,7 +17,7 @@ app.use(session({
 }));
 declare module "express-session" {
     interface SessionData {
-      userId: string;
+      name: string;
     }
 }
 
@@ -62,6 +62,9 @@ app.get("/game", (req, res) => {
 });
 
 app.get("/library", async(req, res) => {
+  if (req.session.name == null) {
+    return res.redirect("/login");
+   }
   const response = await fetch('https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit');
   const data = await response.json();
   res.render("library", {data});
@@ -84,8 +87,12 @@ app.post("/library", async(req, res) => {
 });
 
 app.get("/blacklist", async(req, res) => {
-  let user = await collection.findOne({ name: 'test' });  //test moet veranderd worden naar session id 
+  let user = await collection.findOne({ name: req.session.name });
   let data : any[] = [];
+
+   if (user == null) {
+    return res.redirect("/login");
+   }
  
   if (user?.blacklist) {
     for (const element of user.blacklist) {
@@ -104,13 +111,16 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", async(req, res) => {
-   let { email, password } = req.body;
-    let user = await collection.findOne({ email });
-
+   const { email, password } = req.body;
+     let user = await collection.findOne({ email });
     if (user && await bcrypt.compare(password, user.password)) {
-        req.session.userId = user.name;
+        req.session.name = user.name;
+        res.redirect("/game"); 
     }
-    res.redirect("game"); 
+    else{
+      res.redirect("/")
+    }
+    
 });
 
 app.get("/register", (req, res) => {
@@ -120,10 +130,14 @@ app.get("/register", (req, res) => {
 
 app.post("/register", async (req, res) => {
     const {  name, email, password } = req.body;
-    if (await collection.findOne({ email })) {
+    console.log(name);
+    console.log(email);
+    console.log(password);
+    if (await collection.findOne({ email : email })) {
         // return res.render("register", { error: "Email bestaat al" });  !!!!! aanpassen in de ejs van register
+        res.redirect("/")
     }
-    else {
+    else {  
         const hashedPassword = await bcrypt.hash(password, 10);
         await collection.insertOne({
         name,
@@ -132,11 +146,15 @@ app.post("/register", async (req, res) => {
         favorite : [],
         blacklist: [],
      });
+     res.redirect("/login");
     }
-  res.redirect("/login");
+     
 });
 
 app.get("/detail", async(req, res) => {
+  if (req.session.name == null) {
+    return res.redirect("/login");
+   }
   let name = req.query.id;
   const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
   const data = await response.json();
@@ -145,11 +163,11 @@ app.get("/detail", async(req, res) => {
 });
 
 app.post("/verbannen", async(req, res) => {
-  let name = req.body.name;
-  //let message = prompt("waarom wil je deze skin blacklisten");
-  console.log(name);
-  //console.log(message);
-  collection.updateOne({ name: "test" }, { $push: { blacklist: name } }); //testing naam moet veranderd worden naar session dinge !!!!!
+  if (req.session.name == null) {
+    return res.redirect("/login");
+   }
+  let skin = req.body.name;
+  collection.updateOne({ name: req.session.name }, { $push: { blacklist: skin } }); 
   res.redirect("library")
    
 });
