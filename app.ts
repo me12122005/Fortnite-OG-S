@@ -263,23 +263,20 @@ app.get("/blacklist", async (req, res) => {
 
   const charactersWithNotes: any[] = [];
 
-  for (const blacklistedItem of user.blacklist || []) {
-    const skinName = blacklistedItem.name;
-    const note = blacklistedItem.note || "";
-
-    const url = `https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${skinName}`;
-    const response = await fetch(url);
+  for (const { name, note = "" } of user.blacklist || []) {
+    const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
     const json = await response.json();
 
-    if (json?.data?.length) {
+    if (json?.data?.[0]) {
       const character = json.data[0];
       character.note = note;
       charactersWithNotes.push(character);
     }
   }
 
-  res.render("blacklist", { data: { data: charactersWithNotes } });
+  res.render("blacklist", { data: charactersWithNotes });
 });
+
 
 
 app.post("/verbannen", async (req, res) => {
