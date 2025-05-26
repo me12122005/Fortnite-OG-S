@@ -3,6 +3,7 @@ import { Collection, MongoClient } from "mongodb";
 import { User, Favorite, Blacklist, Emote } from "./interfaces/types";
 import bcrypt from "bcrypt";
 import e from "express";
+import { error } from "console";
 
 const app = express();
 
@@ -49,19 +50,6 @@ app.get("/favorite", (req, res) => {
 
 app.get("/game", (req, res) => {
   res.render("game");
-});
-
-app.get("/selection", async (req, res) => {
-  let name = req.query.id;
-  const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
-  const data = await response.json();
-
-  const emoteRes = await fetch(`https://fortnite-api.com/v2/cosmetics/br?type=emote`);
-  const emoteData = await emoteRes.json();
-  const emotesArray = emoteData.data as any[];
-  const filteredEmotes = emotesArray.filter(item => item.type.value === "emote").slice(0, 9);
-
-  res.render("selection", { data, emotes: filteredEmotes });
 });
 
 app.get("/library", async (req, res) => {
@@ -135,8 +123,29 @@ app.post("verbannen", async (req, res) => {
   console.log(message);
 });
 
-app.post("selection", async (req, res) => {
+app.get("/selection", async (req, res) => {
+  let name = req.query.id;
+  const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
+  const data = await response.json();
 
+  const emoteRes = await fetch(`https://fortnite-api.com/v2/cosmetics/br?type=emote`);
+  const emoteData = await emoteRes.json();
+  const emotesArray = emoteData.data as any[];
+  const filteredEmotes = emotesArray.filter(item => item.type.value === "emote").slice(0, 9);
+
+  res.render("selection", { data, emotes: filteredEmotes });
+});
+
+app.post("selection", (req, res) => {
+  const { weapon, emote } = req.body;
+
+  if (!weapon || !emote) {
+    return res.render("selection", {
+      error: "Je moet 1 wapen en 1 emote kiezen"
+    })
+    console.log("Gekozen wapen is:", weapon);
+    console.log("Gekozen emote is:", emote);
+  }
 });
 app.listen(3000, async () => {
   await connect();
