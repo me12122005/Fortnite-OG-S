@@ -1,24 +1,19 @@
-export interface User {
-  name: string;
-  email: string;
-  password: string;
-  favorite: Favorite[];
-  blacklist: Blacklist[];
+import { ObjectId } from "mongodb";
+
+export interface Favorite {
+  id: string;
+  image: string;
 }
 
 export interface Blacklist {
   name: string;
-  notes: string;
 }
 
-export interface Favorite {
+export interface User {
+  _id?: ObjectId;
   name: string;
-  score: number;
-}
-
-export interface Emote {
-  name: string;
-  images: {
-    icon: string;
-  };
+  email: string;
+  password: string;
+  favorite: Favorite[];
+  blacklist: string[];
 }

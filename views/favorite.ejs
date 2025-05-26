@@ -1,47 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <title>Favorites</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/header.css" />
+  <link rel="stylesheet" href="/css/footer.css" />
+  <title>Favorites</title>
 </head>
 <body id="detail-page">
 
-    <%- include ("partials/header") %>
+  <%- include("partials/header") %>
 
-    <main>
-        <section class="character-selection">
-            <h1>Favorites</h1>
-            <section class="character-details">
+  <main>
+    <section class="character-selection">
+      <h1>Favorites</h1>
+      <section class="character-details">
 
-                <article class="character-card">
-                    <a href="detail.html">
-                        <img src="/assets/images/jonesypic.png" alt="Character 1" class="character">
-                    </a>
-                </article>
+        <% if (favorites && favorites.length > 0) { %>
+          <% favorites.forEach(fav => { %>
+            <article class="character-card">
+              <a href="/detail?id=<%= fav.id %>">
+                <img src="<%= fav.image %>" alt="Favorite Character" class="character" />
+              </a>
+            </article>
+          <% }) %>
+        <% } else { %>
+          <p>Je hebt nog geen favorites toegevoegd.</p>
+        <% } %>
 
-         
-                <article class="character-card">
-                    <a href="detail.html">
-                        <img src="/assets/images/jonesypic.png" alt="Character 2" class="character">
-                    </a>
-                </article>
+      </section>
+    </section>
+  </main>
 
-               
-                <article class="character-card">
-                    <a href="detail.html">
-                        <img src="/assets/images/jonesypic.png" alt="Character 3" class="character">
-                    </a>
-                </article>
-        </section>
-    </main>
-
-    <footer>
-      
-    </footer>
+  <footer></footer>
 
 </body>
 </html>
