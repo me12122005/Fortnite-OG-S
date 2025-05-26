@@ -1,48 +1,49 @@
 import express from "express";
-import { Collection, MongoClient } from "mongodb";  
+import { Collection, MongoClient } from "mongodb";
 import { User, Favorite, Blacklist } from "./interfaces/types";
-import session from "express-session";
 import bcrypt from "bcrypt";
+import e from "express";
+import { error } from "console";
 
 const app = express();
 
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
-app.use(express.urlencoded({ extended:true}))
+app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs');
 app.use(session({
-    secret: "secret-key",
-    resave: false,
-    saveUninitialized: true,
+  secret: "secret-key",
+  resave: false,
+  saveUninitialized: true,
 }));
 declare module "express-session" {
-    interface SessionData {
-      name: string;
-    }
+  interface SessionData {
+    name: string;
+  }
 }
 
-const uri = "mongodb+srv://s154672:FortniteOGSpswd@fortniteogs.nl0tmqx.mongodb.net/"; 
+const uri = "mongodb+srv://s154672:FortniteOGSpswd@fortniteogs.nl0tmqx.mongodb.net/";
 const client = new MongoClient(uri);
-const collection : Collection<User> = client.db("FortniteOGS").collection<User>("Users");
+const collection: Collection<User> = client.db("FortniteOGS").collection<User>("Users");
 
-async function connect(){
-    try {
-        await client.connect();
-        console.log("Connected to database");
-        process.on("SIGINT", exit);
-    } catch (error) {
-        console.error(error);
-    } 
+async function connect() {
+  try {
+    await client.connect();
+    console.log("Connected to database");
+    process.on("SIGINT", exit);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 async function exit() {
-    try {
-        await client.close();
-        console.log("Disconnected from database");
-    } catch (error) {
-        console.error(error);
-    }
-    process.exit(0);
+  try {
+    await client.close();
+    console.log("Disconnected from database");
+  } catch (error) {
+    console.error(error);
+  }
+  process.exit(0);
 }
 
 
@@ -61,119 +62,131 @@ app.get("/game", (req, res) => {
   res.render("game");
 });
 
-app.get("/library", async(req, res) => {
-  if (req.session.name == null) {
-    return res.redirect("/login");
-   }
+app.get("/library", async (req, res) => {
   const response = await fetch('https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit');
   const data = await response.json();
-  res.render("library", {data});
+  res.render("library", { data });
 });
 
-app.post("/library", async(req, res) => {
-  let name : string = req.body.name;
-  let rarity : string = req.body.rarity;
+app.post("/library", async (req, res) => {
+  let name: string = req.body.name;
+  let rarity: string = req.body.rarity;
 
   if (name == "") {
     const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&rarity=${rarity}`);
     const data = await response.json();
-    res.render("library", {data});
+    res.render("library", { data });
   }
   if (rarity == "") {
     const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
     const data = await response.json();
-    res.render("library", {data});
+    console.log(data)
+    res.render("library", { data });
   }
 });
 
-app.get("/blacklist", async(req, res) => {
+app.get("/blacklist", async (req, res) => {
   let user = await collection.findOne({ name: req.session.name });
-  let data : any[] = [];
+  let data: any[] = [];
 
-   if (user == null) {
+  if (user == null) {
     return res.redirect("/login");
-   }
- 
+  }
+
   if (user?.blacklist) {
     for (const element of user.blacklist) {
       let response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${element}`);
       let skin = await response.json();
       data.push(skin.data[0]);
     }
-    
+
   }
 
-  res.render("blacklist", {data});
+  res.render("blacklist", { data });
 });
 
 app.get("/login", (req, res) => {
+
   res.render("login");
 });
 
-app.post("/login", async(req, res) => {
-   const { email, password } = req.body;
-     let user = await collection.findOne({ email });
-    if (user && await bcrypt.compare(password, user.password)) {
-        req.session.name = user.name;
-        res.redirect("/game"); 
-    }
-    else{
-      res.redirect("/")
-    }
-    
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  let user = await collection.findOne({ email });
+  if (user && await bcrypt.compare(password, user.password)) {
+    req.session.name = user.name;
+    res.redirect("/game");
+  }
+  else {
+    res.redirect("/")
+  }
+
 });
 
 app.get("/register", (req, res) => {
-  
+
   res.render("register");
 });
 
+
 app.post("/register", async (req, res) => {
-    const {  name, email, password } = req.body;
-    console.log(name);
-    console.log(email);
-    console.log(password);
-    if (await collection.findOne({ email : email })) {
-        // return res.render("register", { error: "Email bestaat al" });  !!!!! aanpassen in de ejs van register
-        res.redirect("/")
-    }
-    else {  
-        const hashedPassword = await bcrypt.hash(password, 10);
-        await collection.insertOne({
-        name,
-        email,
-        password: hashedPassword,
-        favorite : [],
-        blacklist: [],
-     });
-     res.redirect("/login");
-    }
-     
+  const { name, email, password } = req.body;
+  if (await collection.findOne({ email })) {
+    return res.render("register", { error: "Email bestaat al" });
+  }
+  else {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await collection.insertOne({
+      name,
+      email,
+      password: hashedPassword,
+      favorite: [],
+      blacklist: [],
+    });
+  }
+  res.redirect("/login");
 });
 
-app.get("/detail", async(req, res) => {
-  if (req.session.name == null) {
-    return res.redirect("/login");
-   }
+app.get("/detail", async (req, res) => {
+  let name = req.query.id;
+  const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
+  const data = await response.json();
+  console.log(data)
+  res.render("detail", { data });
+});
+
+app.post("verbannen", async (req, res) => {
+  let name = req.body.name;
+  let message = prompt("waarom wil je deze skin blacklisten");
+  console.log(name);
+  console.log(message);
+});
+
+app.get("/selection", async (req, res) => {
   let name = req.query.id;
   const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/search/all?type=outfit&name=${name}`);
   const data = await response.json();
 
-  res.render("detail", {data});
+  const emoteRes = await fetch(`https://fortnite-api.com/v2/cosmetics/br?type=emote`);
+  const emoteData = await emoteRes.json();
+  const emotesArray = emoteData.data as any[];
+  const filteredEmotes = emotesArray.filter(item => item.type.value === "emote").slice(0, 9);
+
+  res.render("selection", { data, emotes: filteredEmotes });
 });
 
-app.post("/verbannen", async(req, res) => {
-  if (req.session.name == null) {
-    return res.redirect("/login");
-   }
-  let skin = req.body.name;
-  collection.updateOne({ name: req.session.name }, { $push: { blacklist: skin } }); 
-  res.redirect("library")
-   
+app.post("selection", (req, res) => {
+  const { weapon, emote } = req.body;
+
+  if (!weapon || !emote) {
+    return res.render("selection", {
+      error: "Je moet 1 wapen en 1 emote kiezen"
+    })
+    console.log("Gekozen wapen is:", weapon);
+    console.log("Gekozen emote is:", emote);
+  }
 });
-
-
-app.listen(3000, async() => {
-    await connect();
-    console.log("Server is running on port 3000");
+app.listen(3000, async () => {
+  await connect();
+  console.log("Server is running on port 3000");
 });

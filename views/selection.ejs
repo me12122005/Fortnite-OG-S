@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <title>Selectie</title>
+</head>
+<body >
+
+    <%- include ("partials/header") %>
+            <main class="selection-page">
+                 <section class="character-info-selection">
+                    <h1>Karakter</h1>
+                    <img src="<%= data.data[0].images.icon %>" alt="<%= data.data[0].name %>" class="character-selection-page" draggable="false">
+                    <p id="character-name"><%= data.data[0].name %></p>
+                    <p>
+                <%= data.data[0].description %>
+                </p>
+                </section>
+
+            <section class="selection">
+                <h2>kies je wapen</h2>
+                <ul class="weapons">
+                    <li><img src="/assets/images/Assault_Rifle.webp" alt="Assault_Rifle" ></li>
+                    <li><img src="/assets/images/Mythic_Goldfish.webp" alt="Mythic_Goldfish" ></li>
+                    <li><img src="/assets/images/Rocket_Launcher.webp" alt="Rocket_Launcher" ></li>
+                    <li><img src="/assets/images/Mammoth_Pistol.webp" alt="Mammoth_Pistol"></li>
+                    <li><img src="/assets/images/Pump_Shotgun.webp" alt="Pump_Shotgun"></li>
+                    <li><img src="/assets/images/Sniper_Rifle.webp" alt="Sniper_Rifle"></li>
+                </ul>
+                 <h2>kies je emote</h2>
+            </section>
+            <section class="emote">
+    <% emotes.forEach(emote => { %>
+      
+        <img src="<%= emote.images.icon %>" alt="<%= emote.name %>" class="emote-images" >
+            
+         <% }) %>
+         <h3>lol</h3>
+         </section>
+             
+            <section id="selection-result">
+                <form action="selection">
+                       <p>Geselecteerdde wapens: <span id="selected-weapon">None</span></p>
+                      <p>Geselecteerdde emote: <span id="selected-emote">None</span></p>
+                <button type="submit">verzenden</button>
+                </form>
+            </section>
+
+       </main>
+
+    <footer>
+        
+    </footer>
+
+</body>
+</html>
+
