@@ -46,13 +46,12 @@ h1{
 
 
 .game-list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
     gap: 30px;
-    justify-content: center;
     padding: 20px;
     max-width: 1400px;
-    margin: auto;
+    
 }
 
 
