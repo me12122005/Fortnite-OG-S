@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <title>login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="/css/style.css" />
+  <title>login</title>
 </head>
 <body>
-    <body >
-        <header id="header-login-page"><img src="/assets/images/fortnite-logo.webp" alt="fortnite-logo" srcset="" class="fortnite-logo" tabindex="0"></header>
-        <main> 
-            <form action="library" method="get" id="form-login-page">
-            <section id="input-section"><input type="email" name="password" id="email" placeholder="e-mail" required>
-            <input type="password" name="password" id="password" placeholder="wachtwoord" required></section>
-            <section id="button-section"> 
-            <button id="login-button" type="submit">Login</button>
-           
-            <button  id="register-button" onclick="location='register'" >Registreren</button>
-            </section>
-            </form>
-        </main>
-        <footer><img src="/assets/images/Supply_Llama.webp" alt="Supply-Llama" srcset=" " class="Supply-Llama"></footer>
-    </body>
-</body>
+  <header id="header-login-page">
+    <img src="/assets/images/fortnite-logo.webp" alt="fortnite logo" class="fortnite-logo" tabindex="0" />
+  </header>
 
+  <main>
+    <section id="form-wrapper">
+      <form action="library" method="get" id="form-login-page">
+        <section id="input-section">
+          <input type="email" name="email" id="email" placeholder="e-mail" required />
+          <input type="password" name="password" id="password" placeholder="wachtwoord" required />
+        </section>
+
+        <section id="button-section">
+          <button id="login-button" type="submit">login</button>
+        </section>
+      </form>
+
+      <button id="register-button" type="button" onclick="location='register'">registreren</button>
+    </section>
+  </main>
+
+  <footer>
+    <img src="/assets/images/Supply_Llama.webp" alt="supply llama" class="supply-llama" />
+  </footer>
+</body>
 </html>
