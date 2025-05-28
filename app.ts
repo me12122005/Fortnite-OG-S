@@ -3,8 +3,13 @@ import session from "express-session";
 import { Collection, MongoClient, ObjectId } from "mongodb";
 import bcrypt from "bcrypt";
 import { User } from "./interfaces/types";
+import nodemailer from 'nodemailer';
+import crypto from 'crypto';
+
+
 
 const app = express();
+const tokens: Record<string, string> = {};
 
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
@@ -27,6 +32,7 @@ declare module "express-session" {
     emote?: string;
     characterId?: string;
     characterImage?: string;
+    resetEmail?: string;
   }
 }
 
@@ -355,6 +361,71 @@ app.post("/verbannen", async (req, res) => {
 
   res.redirect("/blacklist");
 });
+
+app.get('/forgot-password', (req, res) => {
+  res.render('forgot-password');
+});
+
+app.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+
+  // TODO: check of email bestaat in DB (optioneel)
+
+  // Sla email op in sessie:
+  req.session.resetEmail = email;
+
+  // Maak een reset link - in dit geval geen token, gewoon naar reset page:
+  const resetLink = `http://localhost:3000/reset-password`;
+
+  // Stuur mail
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'jouwgmail@gmail.com',
+      pass: 'appwachtwoord'
+    }
+  });
+
+  await transporter.sendMail({
+    to: email,
+    subject: 'Wachtwoord resetten',
+    html: `<p>Klik <a href="${resetLink}">hier</a> om je wachtwoord te resetten.</p>`
+  });
+
+  res.send('Check je e-mail om je wachtwoord te resetten.');
+});
+
+app.get('/reset-password', (req, res) => {
+  if (!req.session.resetEmail) {
+    return res.send('Je hebt geen wachtwoord reset aangevraagd.');
+  }
+  res.render('reset-password', { email: req.session.resetEmail });
+});
+
+
+app.post('/reset-password', async (req, res) => {
+  const { newPassword } = req.body;
+  const email = req.session.resetEmail;
+
+  if (!email) {
+    return res.send('Geen geldige sessie gevonden.');
+  }
+  // Hash wachtwoord
+  const hashed = await bcrypt.hash(newPassword, 10);
+
+  // TODO: Update je wachtwoord in de DB met het gehashte wachtwoord
+  console.log(`Wachtwoord van ${email} is veranderd naar ${hashed}`);
+
+  // Verwijder sessie reset email
+  delete req.session.resetEmail;
+  await collection.updateOne(
+    { email: email },
+    { $set: { password: hashed } }
+  );
+
+  res.send('Je wachtwoord is aangepast! Je kunt nu <a href="/login">inloggen</a>.');
+});
+
 
 app.listen(3000, async () => {
   await connect();
