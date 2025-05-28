@@ -1,34 +1,38 @@
 header {
-    display: flex;
-    justify-content: center;
-    padding: 8px 10px;
+    background-color: rgba(0, 255, 255, 0.15);
+    border-radius: 20px;
+    margin: 10px auto;
+    padding: 10px 16px;
+    max-width: 950px;
+    width: 90%;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+    border:solid 0.6px black;
+    
 }
 
-nav {
+.nav-wrapper {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
     background-color: #0000004d;
     border-radius: 16px;
-    padding: 8px 12px;
-    width: 90%;
-    max-width: 800px;
-    transition: background-color 0.3s ease;
+    padding: 8px 16px;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    gap: 12px;
 }
 
 nav ul {
     display: flex;
+    justify-content: center;
+    align-items: center;
     list-style: none;
-    align-items: center;
-    gap: 12px;
-    padding: 0;
     margin: 0;
-    width: 100%;
-    justify-content: space-around;
-}
-
-nav ul li {
-    display: flex;
-    align-items: center;
+    padding: 0;
+    gap: 16px;
+    flex: 1;
 }
 
 nav ul li a {
@@ -51,7 +55,7 @@ nav ul li a img {
 }
 
 .profile {
-    margin-left: auto;
+    flex-shrink: 0;
 }
 
 .profile img {
@@ -66,28 +70,40 @@ nav ul li a img {
     transform: scale(1.1);
 }
 
-@media (max-width: 320px) {
-    nav {
-        padding: 6px 8px;
-        border-radius: 14px;
+/* ✅ Responsive tweaks */
+@media (max-width: 600px) {
+    .nav-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 6px 12px;
     }
-    
+
     nav ul {
-        gap: 8px;
+        gap: 12px;
     }
-    
+
     nav ul li a img {
         height: 28px;
         width: 28px;
     }
-    
+
     .profile img {
         height: 32px;
         width: 32px;
     }
-    
+}
 
-    .profile {
-        margin-left: 0;
+@media (max-width: 360px) {
+    .nav-wrapper {
+        padding: 4px 8px;
+    }
+
+    nav ul {
+        gap: 8px;
+    }
+
+    .profile img {
+        height: 28px;
+        width: 28px;
     }
 }
