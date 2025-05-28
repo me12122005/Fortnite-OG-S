@@ -22,10 +22,26 @@
     </section>
 
     <section class="thumbs">
-      <img src="/assets/images/thumbs down.png" alt="Thumbs down" id="thumbsdown" draggable="false" />
-      <p class="score">X/X</p>
-      <img src="/assets/images/thumbs up.png" alt="Thumbs up" id="thumbsup" draggable="false" />
-    </section>
+  <form action="/game/vote" method="POST" style="display: inline;">
+    <input type="hidden" name="characterId" value="<%= characterId %>">
+    <input type="hidden" name="result" value="lose">
+    <button type="submit" id="thumbsdown" style="background:none; border:none; padding:0; cursor:pointer;">
+      <img src="/assets/images/thumbs down.png" alt="Thumbs down" draggable="false" />
+    </button>
+  </form>
+
+  <p class="score">
+    Wins: <%= (favoritesScore?.wins || 0) %> / Loses: <%= (favoritesScore?.loses || 0) %>
+  </p>
+
+  <form action="/game/vote" method="POST" style="display: inline;">
+    <input type="hidden" name="characterId" value="<%= characterId %>">
+    <input type="hidden" name="result" value="win">
+    <button type="submit" id="thumbsup" style="background:none; border:none; padding:0; cursor:pointer;">
+      <img src="/assets/images/thumbs up.png" alt="Thumbs up" draggable="false" />
+    </button>
+  </form>
+</section>
   </main>
 
   <footer></footer>

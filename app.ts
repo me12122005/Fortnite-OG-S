@@ -3,6 +3,7 @@ import session from "express-session";
 import { Collection, MongoClient, ObjectId } from "mongodb";
 import bcrypt from "bcrypt";
 import { User } from "./interfaces/types";
+import { Request, Response } from "express";
 
 const app = express();
 
@@ -254,19 +255,23 @@ app.post("/blacklist/delete", async (req, res) => {
 
 });
 
-
-
-
-
-
-
-
 app.get("/game", async (req, res) => {
   const { weapon, emote, characterId, characterImage } = req.session;
 
   if (!weapon || !emote || !characterId || !characterImage) {
     return res.redirect("/library");
   }
+
+  // Get user info to retrieve favorites scores
+  const userId = req.session.userId;
+  if (!userId) return res.redirect("/login");
+
+  const user = await collection.findOne({ _id: new ObjectId(userId) });
+  if (!user) return res.redirect("/login");
+
+  // Find favorites score for this character
+  const favorite = user.favorite.find(fav => fav.id === characterId);
+  const favoritesScore = favorite ? { wins: favorite.wins || 0, loses: favorite.loses || 0 } : { wins: 0, loses: 0 };
 
   const emoteResponse = await fetch(
     `https://fortnite-api.com/v2/cosmetics/br/search/all?type=emote&name=${emote}`
@@ -279,8 +284,12 @@ app.get("/game", async (req, res) => {
     weapon,
     emoteImage,
     characterImage,
+    favoritesScore,
+    characterId,
   });
 });
+
+
 
 app.get("/detail", async (req, res) => {
   const name = req.query.id;
@@ -355,6 +364,36 @@ app.post("/verbannen", async (req, res) => {
 
   res.redirect("/blacklist");
 });
+
+app.post("/game/vote", async (req: Request, res: Response) => {
+  const userId = req.session.userId;
+  const { characterId, result } = req.body as { characterId: string; result: "win" | "lose" };
+
+  if (!userId || !characterId || !result) {
+    return res.status(400).send("Ongeldige data");
+  }
+
+  const user = await collection.findOne({ _id: new ObjectId(userId) });
+  if (!user) return res.status(401).send("Niet ingelogd");
+
+  const favoriteIndex = user.favorite.findIndex(fav => fav.id === characterId);
+  if (favoriteIndex === -1) {
+    return res.status(404).send("Favoriet niet gevonden");
+  }
+
+  const favoriteItem = user.favorite[favoriteIndex];
+
+  const wins = (favoriteItem.wins ?? 0) + (result === "win" ? 1 : 0);
+  const loses = (favoriteItem.loses ?? 0) + (result === "lose" ? 1 : 0);
+
+  await collection.updateOne(
+    { _id: new ObjectId(userId), "favorite.id": characterId },
+    { $set: { "favorite.$.wins": wins, "favorite.$.loses": loses } }
+  );
+
+  res.redirect("/game");
+});
+
 
 app.listen(3000, async () => {
   await connect();

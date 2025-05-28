@@ -5,6 +5,8 @@ export interface Favorite {
   image: string;
   weapon: string;
   emote: string;
+  wins?: number;
+  loses?: number;
 }
 
 export interface Blacklist {
