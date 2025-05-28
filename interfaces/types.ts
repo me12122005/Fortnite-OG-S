@@ -21,4 +21,5 @@ export interface User {
   password: string;
   favorite: Favorite[];
   blacklist?: Blacklist[];
+  createdAt?: Date;
 }

@@ -723,38 +723,31 @@ img.character-blacklist {
 
 
 /* css - favorite page*/
-#character-details .character-details {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    background: #0000004d;
-    padding: 30px;
-    border-radius: 20px;
-    width: 85%;
-    height: 50rem;
-    margin: 30px auto;
-    border: #000000 1.5px solid;
-}
-
-
 .remove-button{
    color: red;
    display: block;
    margin: auto;
     font-size: 30px;
     font-weight: bold;
-    background: white;
+    background: rgba(65, 70, 129, 0.466);
     border: none;
     margin-top: 10px;
     border-radius: 5px;
-    width: 20vw;
+    padding: 15px;
+     cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+}
+.remove-button:hover{
+     transform: scale(1.2);
+}
+.character-card-form-favorite img{
+cursor: pointer;
 }
 
-
-
-
-
+.character-card-form-favorite button{
+   background: transparent;
+   border: none;
+}
 
 /* css - register page*/
 .registreren-h2{
@@ -784,3 +777,28 @@ img.character-blacklist {
     }
     
 
+    /* css - profile page*/
+    .profile-container{
+    text-align: center;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; 
+    line-height: 60px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    margin: 30px ;
+    border: #000000 1.5px solid;
+    }
+
+    .button-logout{
+    background-color: rgba(67, 147, 240, 0.733);
+     text-decoration: none;
+     padding: 20px;
+     border-radius: 25px;
+     border:solid black 1px;
+     margin-top: 15px;
+     color: black;
+    } 
+    
+    .button-logout:hover{
+     background-color: rgb(76, 204, 243);
+    }

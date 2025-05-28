@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profiel</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/header.css" />
+  <link rel="stylesheet" href="/css/footer.css" />
+</head>
+<body>
+  <%- include("partials/header") %>
+  <main class="profile-container" > 
+    <h1>Welkom, <%= user.name %>!</h1>
+    <section class="profile-info">
+      <p><strong>Gebruikersnaam:</strong> <%= user.name %></p>
+      <p><strong>Email:</strong> <%= user.email %></p>
+      <p><strong>Aangemaakt op:</strong> 
+        <% if (user.createdAt) { %>
+          <%= user.createdAt.toDateString() %>
+        <% } else { %>
+          Onbekend
+        <% } %>
+      </p>
+    </section>
+    <section class="profile-actions">
+      <a href="/logout" class="button-logout">Uitloggen</a>
+    </section>
+  </main>
+  <footer></footer>
+</body>
+</html>

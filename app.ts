@@ -79,6 +79,7 @@ app.post("/register", async (req, res) => {
     password: hashedPassword,
     favorite: [],
     blacklist: [],
+    createdAt: new Date()
   });
   res.redirect("/login");
 });
@@ -262,24 +263,34 @@ app.get("/game", async (req, res) => {
     return res.redirect("/library");
   }
 
-  // Get user info to retrieve favorites scores
   const userId = req.session.userId;
   if (!userId) return res.redirect("/login");
 
   const user = await collection.findOne({ _id: new ObjectId(userId) });
   if (!user) return res.redirect("/login");
 
-  // Find favorites score for this character
   const favorite = user.favorite.find(fav => fav.id === characterId);
-  const favoritesScore = favorite ? { wins: favorite.wins || 0, loses: favorite.loses || 0 } : { wins: 0, loses: 0 };
+  if (!favorite) return res.redirect("/favorite");
+
+  const favoritesScore = {
+    wins: favorite.wins || 0,
+    loses: favorite.loses || 0
+  };
 
   const emoteResponse = await fetch(
     `https://fortnite-api.com/v2/cosmetics/br/search/all?type=emote&name=${emote}`
   );
   const emoteData = await emoteResponse.json();
-
-  const emoteImage = emoteData.data[0].images.icon;
-
+  let emoteImage = "";
+  if (
+    emoteData &&
+    emoteData.data &&
+    emoteData.data[0] &&
+    emoteData.data[0].images &&
+    emoteData.data[0].images.icon
+  ) {
+    emoteImage = emoteData.data[0].images.icon;
+  }
   res.render("game", {
     weapon,
     emoteImage,
@@ -288,8 +299,6 @@ app.get("/game", async (req, res) => {
     characterId,
   });
 });
-
-
 
 app.get("/detail", async (req, res) => {
   const name = req.query.id;
@@ -395,6 +404,29 @@ app.post("/game/vote", async (req: Request, res: Response) => {
 
   res.redirect("/game");
 });
+
+
+app.get("/profile", async (req, res) => {
+  if (!req.session || !req.session.userId) {
+    return res.redirect("/login");
+  }
+
+  let user;
+  try {
+    user = await collection.findOne({ _id: new ObjectId(req.session.userId) });
+  } catch (error) {
+    return res.redirect("/login");
+  }
+
+  if (!user) {
+    return res.redirect("/login");
+  }
+
+
+  res.render("profile", { user });
+});
+
+
 
 
 app.listen(3000, async () => {

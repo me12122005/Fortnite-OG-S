@@ -19,27 +19,32 @@
         <% if (favorites && favorites.length > 0) { %>
           <% favorites.forEach(fav => { %>
             <article class="character-card">
-              <a href="/detail?id=<%= fav.id %>">
-                <img src="<%= fav.image %>" alt="Favorite Character" class="character" />
-                 
-              </a>
-               <p><strong>Wapen:</strong> <%= fav.weapon %></p>
-                <p><strong>Emote:</strong> <%= fav.emote %></p>
-                <form action="/favorite/delete" method="POST">
-                  <input type="hidden" name="id" value="<%= fav.id %>">
-                  <button type="submit" class="remove-button">X</button>
-                </form>
+
+              <form action="/selection" method="POST" class="character-card-form-favorite">
+                <input type="hidden" name="weapon" value="<%= fav.weapon %>">
+                <input type="hidden" name="emote" value="<%= fav.emote %>">
+                <input type="hidden" name="characterId" value="<%= fav.id %>">
+                <input type="hidden" name="characterImage" value="<%= fav.image %>">
+                <button type="submit" class="character-button">
+                  <img src="<%= fav.image %>" alt="Favorite Character"  />
+                  <p><strong>Wapen:</strong> <%= fav.weapon %></p>
+                  <p><strong>Emote:</strong> <%= fav.emote %></p>
+                  <p><strong>Wins:</strong> <%= fav.wins || 0 %></p>
+                  <p><strong>Loses:</strong> <%= fav.loses || 0 %></p>
+                </button>
+              </form>
+              <form action="/favorite/delete" method="POST" class="delete-form">
+                <input type="hidden" name="id" value="<%= fav.id %>">
+                <button type="submit" class="remove-button">❌</button>
+              </form>
             </article>
           <% }) %>
         <% } else { %>
           <p>Je hebt nog geen favorieten toegevoegd.</p>
         <% } %>
-
       </section>
     </section>
   </main>
-
   <footer></footer> 
-
 </body>
 </html>
