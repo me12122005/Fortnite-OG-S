@@ -15,16 +15,33 @@
   <main>
     <section class="game-container">
       <img src="/assets/images/<%= weapon %>.webp" alt="Wapen" id="weapons" draggable="false" />
-
       <img src="<%= characterImage %>" alt="Karakter" draggable="false" />
-
       <img src="<%= emoteImage %>" alt="Emote" id="emote" draggable="false" />
     </section>
 
     <section class="thumbs">
-      <img src="/assets/images/thumbs down.png" alt="Thumbs down" id="thumbsdown" draggable="false" />
-      <p class="score">X/X</p>
-      <img src="/assets/images/thumbs up.png" alt="Thumbs up" id="thumbsup" draggable="false" />
+      <form action="/game/vote" method="POST" style="display: inline;">
+        <input type="hidden" name="characterId" value="<%= characterId %>">
+        <input type="hidden" name="result" value="lose">
+        <button type="submit" id="thumbsdown" style="background:none; border:none; padding:0; cursor:pointer;">
+          <img src="/assets/images/thumbs down.png" alt="Thumbs down" draggable="false" />
+        </button>
+      </form>
+
+      <% if (!characterId) { %>
+        <p>Je hebt nog geen favorieten geselecteerd.</p>
+      <% } else { %>
+        <p class="score">
+          Wins: <%= favoritesScore.wins || 0 %> / Loses: <%= favoritesScore.loses || 0 %>
+        </p>
+        <form action="/game/vote" method="POST" style="display: inline;">
+          <input type="hidden" name="characterId" value="<%= characterId %>">
+          <input type="hidden" name="result" value="win">
+          <button type="submit" id="thumbsup" style="background:none; border:none; padding:0; cursor:pointer;">
+            <img src="/assets/images/thumbs up.png" alt="Thumbs up" draggable="false" />
+          </button>
+        </form>
+      <% } %>
     </section>
   </main>
 

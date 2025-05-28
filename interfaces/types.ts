@@ -5,6 +5,8 @@ export interface Favorite {
   image: string;
   weapon: string;
   emote: string;
+  wins?: number;
+  loses?: number;
 }
 
 export interface Blacklist {
@@ -19,4 +21,5 @@ export interface User {
   password: string;
   favorite: Favorite[];
   blacklist?: Blacklist[];
+  createdAt?: Date;
 }

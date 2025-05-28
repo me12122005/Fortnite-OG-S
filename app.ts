@@ -3,12 +3,10 @@ import session from "express-session";
 import { Collection, MongoClient, ObjectId } from "mongodb";
 import bcrypt from "bcrypt";
 import { User } from "./interfaces/types";
+import { Request, Response } from "express";
 import nodemailer from 'nodemailer';
 
-
-
 const app = express();
-const tokens: Record<string, string> = {};
 
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
@@ -83,6 +81,7 @@ app.post("/register", async (req, res) => {
     password: hashedPassword,
     favorite: [],
     blacklist: [],
+    createdAt: new Date()
   });
   res.redirect("/login");
 });
@@ -246,7 +245,6 @@ app.post("/favorite/delete", async (req, res) => {
 app.post("/blacklist/delete", async (req, res) => {
   const userId = req.session.userId;
   const name = req.body.name;
- 
 
   if (!userId) return res.redirect("/login");
   if (!name) return res.redirect("/blacklist");
@@ -260,13 +258,6 @@ app.post("/blacklist/delete", async (req, res) => {
 
 });
 
-
-
-
-
-
-
-
 app.get("/game", async (req, res) => {
   const { weapon, emote, characterId, characterImage } = req.session;
 
@@ -274,17 +265,40 @@ app.get("/game", async (req, res) => {
     return res.redirect("/library");
   }
 
+  const userId = req.session.userId;
+  if (!userId) return res.redirect("/login");
+
+  const user = await collection.findOne({ _id: new ObjectId(userId) });
+  if (!user) return res.redirect("/login");
+
+  const favorite = user.favorite.find(fav => fav.id === characterId);
+  if (!favorite) return res.redirect("/favorite");
+
+  const favoritesScore = {
+    wins: favorite.wins || 0,
+    loses: favorite.loses || 0
+  };
+
   const emoteResponse = await fetch(
     `https://fortnite-api.com/v2/cosmetics/br/search/all?type=emote&name=${emote}`
   );
   const emoteData = await emoteResponse.json();
-
-  const emoteImage = emoteData.data[0].images.icon;
-
+  let emoteImage = "";
+  if (
+    emoteData &&
+    emoteData.data &&
+    emoteData.data[0] &&
+    emoteData.data[0].images &&
+    emoteData.data[0].images.icon
+  ) {
+    emoteImage = emoteData.data[0].images.icon;
+  }
   res.render("game", {
     weapon,
     emoteImage,
     characterImage,
+    favoritesScore,
+    characterId,
   });
 });
 
@@ -314,8 +328,7 @@ app.get("/detail", async (req, res) => {
 });
 
 app.get("/blacklist", async (req, res) => {
-  let userId = req.session.userId;
-
+  const userId = req.session.userId;
   if (!userId) return res.redirect("/login");
 
   const user = await collection.findOne({ _id: new ObjectId(userId) });
@@ -363,6 +376,57 @@ app.post("/verbannen", async (req, res) => {
   res.redirect("/blacklist");
 });
 
+app.post("/game/vote", async (req: Request, res: Response) => {
+  const userId = req.session.userId;
+  const { characterId, result } = req.body as { characterId: string; result: "win" | "lose" };
+
+  if (!userId || !characterId || !result) {
+    res.status(400).send("Ongeldige data");
+    res.redirect('/')
+  }
+
+  const user = await collection.findOne({ _id: new ObjectId(userId) });
+  if (!user) return res.redirect("/");
+
+  const favoriteIndex = user.favorite.findIndex(fav => fav.id === characterId);
+  if (favoriteIndex === -1) {
+    res.status(404).send("Favoriet niet gevonden");
+    res.redirect("library")
+  }
+
+  const favoriteItem = user.favorite[favoriteIndex];
+
+  const wins = (favoriteItem.wins ?? 0) + (result === "win" ? 1 : 0);
+  const loses = (favoriteItem.loses ?? 0) + (result === "lose" ? 1 : 0);
+
+  await collection.updateOne(
+    { _id: new ObjectId(userId), "favorite.id": characterId },
+    { $set: { "favorite.$.wins": wins, "favorite.$.loses": loses } }
+  );
+
+  res.redirect("/game");
+});
+
+
+app.get("/profile", async (req, res) => {
+  if (!req.session || !req.session.userId) {
+    return res.redirect("/login");
+  }
+
+  let user;
+  try {
+    user = await collection.findOne({ _id: new ObjectId(req.session.userId) });
+  } catch (error) {
+    return res.redirect("/login");
+  }
+
+  if (!user) {
+    return res.redirect("/login");
+  }
+
+
+  res.render("profile", { user });
+});
 app.get('/forgot-password', (req, res) => {
   res.render('forgot-password');
 });
@@ -386,6 +450,7 @@ app.post('/forgot-password', async (req, res) => {
     to: email,
     subject: "Wachtwoord resetten",
     html: `<p>Klik <a href="${resetLink}">hier</a> om je wachtwoord te resetten.</p>`,
+
   });
 
   res.send("Check je e-mail om je wachtwoord te resetten.");
@@ -413,6 +478,7 @@ app.post('/reset-password', async (req, res) => {
 
   res.send('Je wachtwoord is aangepast! Je kunt nu <a href="/login">inloggen</a>.');
 });
+
 
 
 app.listen(3000, async () => {
