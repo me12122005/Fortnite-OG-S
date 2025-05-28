@@ -19,7 +19,6 @@
         <% if (favorites && favorites.length > 0) { %>
           <% favorites.forEach(fav => { %>
             <article class="character-card">
-
               <form action="/selection" method="POST" class="character-card-form-favorite">
                 <input type="hidden" name="weapon" value="<%= fav.weapon %>">
                 <input type="hidden" name="emote" value="<%= fav.emote %>">
