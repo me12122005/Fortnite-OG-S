@@ -4,7 +4,6 @@ import { Collection, MongoClient, ObjectId } from "mongodb";
 import bcrypt from "bcrypt";
 import { User } from "./interfaces/types";
 import nodemailer from 'nodemailer';
-import crypto from 'crypto';
 
 
 
@@ -247,6 +246,7 @@ app.post("/favorite/delete", async (req, res) => {
 app.post("/blacklist/delete", async (req, res) => {
   const userId = req.session.userId;
   const name = req.body.name;
+ 
 
   if (!userId) return res.redirect("/login");
   if (!name) return res.redirect("/blacklist");
@@ -314,7 +314,8 @@ app.get("/detail", async (req, res) => {
 });
 
 app.get("/blacklist", async (req, res) => {
-  const userId = req.session.userId;
+  let userId = req.session.userId;
+
   if (!userId) return res.redirect("/login");
 
   const user = await collection.findOne({ _id: new ObjectId(userId) });
@@ -397,18 +398,20 @@ app.post('/forgot-password', async (req, res) => {
 
 app.get('/reset-password', (req, res) => {
   if (!req.session.resetEmail) {
-    return res.send('Je hebt geen wachtwoord reset aangevraagd.');
+    res.send('Je hebt geen wachtwoord reset aangevraagd.');
+    res.redirect('/')
   }
   res.render('reset-password', { email: req.session.resetEmail });
 });
 
 
-app.post('/reset-password', async (req, res) => {
+app.post('/reset-password',  async (req, res) => {
   const { newPassword } = req.body;
   const email = req.session.resetEmail;
 
   if (!email) {
-    return res.send('Geen geldige sessie gevonden.');
+    res.send('Geen geldige sessie gevonden.');
+    res.redirect("/")
   }
   // Hash wachtwoord
   const hashed = await bcrypt.hash(newPassword, 10);
