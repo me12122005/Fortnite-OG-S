@@ -15,12 +15,15 @@
     <main class="character-details-page">
         <article class="character-info">
             <img src="<%= data.data[0].images.icon %>" alt="<%= data.data[0].name %>" class="character" draggable="false">
+     <form action="verbannen" method="post">
+   <section class="note-box">
+     <label for="note-input" class="note-label">Eigen notitie:</label>
+     <input type="text" id="note-input" name="note" class="note-input" placeholder="Schrijf...">
+     <input type="hidden" name="name" value="<%= data.data[0].name %>">
+     <button class="ban-button" aria-label="Verbannen">🚫</button>
+   </section>
+</form>
 
-            <section class="note-box">
-                <label for="note-input" class="note-label">Eigen notitie:</label>
-                <input type="text" id="note-input" class="note-input" placeholder="Schrijf...">
-                
-            </section>
         </article>
 
         <section class="description-box">
@@ -29,8 +32,10 @@
             </p>
 
             <section class="actions">
+                <form action="selection">
+                      <input type="hidden" name="id" value="<%= data.data[0].name %>">
                 <button class="like-button" aria-label="Vind ik leuk">❤️</button>
-                <button class="ban-button" aria-label="Verbannen">🚫</button>
+                </form>    
             </section>
         </section>
     </main>
