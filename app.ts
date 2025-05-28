@@ -370,15 +370,17 @@ app.post("/game/vote", async (req: Request, res: Response) => {
   const { characterId, result } = req.body as { characterId: string; result: "win" | "lose" };
 
   if (!userId || !characterId || !result) {
-    return res.status(400).send("Ongeldige data");
+    res.status(400).send("Ongeldige data");
+    res.redirect('/')
   }
 
   const user = await collection.findOne({ _id: new ObjectId(userId) });
-  if (!user) return res.status(401).send("Niet ingelogd");
+  if (!user) return res.redirect("/");
 
   const favoriteIndex = user.favorite.findIndex(fav => fav.id === characterId);
   if (favoriteIndex === -1) {
-    return res.status(404).send("Favoriet niet gevonden");
+    res.status(404).send("Favoriet niet gevonden");
+    res.redirect("library")
   }
 
   const favoriteItem = user.favorite[favoriteIndex];
