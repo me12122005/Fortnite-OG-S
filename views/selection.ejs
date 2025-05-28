@@ -17,17 +17,14 @@
       <h1>Karakter</h1>
       <img src="<%= data.data[0].images.icon %>" alt="<%= data.data[0].name %>" class="character-selection-page" draggable="false" />
       <p id="character-name"><%= data.data[0].name %></p>
-      <p><%= data.data[0].description %></p>
+      <p id="character-description"><%= data.data[0].description %></p>
     </section>
 
     <section class="selection">
       <h2>Kies je wapen</h2>
       <form action="/selection" method="POST">
-
-        <!-- Hidden inputs om characterId en characterImage mee te sturen -->
         <input type="hidden" name="characterId" value="<%= data.data[0].id %>" />
         <input type="hidden" name="characterImage" value="<%= data.data[0].images.icon %>" />
-
         <ul class="weapons">
           <li>
             <input type="radio" id="Assault_Rifle" name="weapon" value="Assault_Rifle" />
@@ -78,14 +75,10 @@
             </li>
           <% }); %>
         </ul>
-
-        <button type="submit">Verzenden</button>
-
+        <button type="submit" class="selection-submit-button">Verzenden</button>
       </form>
     </section>
   </main>
-
   <footer></footer>
-
 </body>
 </html>

@@ -14,26 +14,32 @@
 
   <main>
     <section class="character-selection">
-      <h1>Favorites</h1>
+      <h1>Favorieten</h1>
       <section class="character-details">
-
         <% if (favorites && favorites.length > 0) { %>
           <% favorites.forEach(fav => { %>
             <article class="character-card">
               <a href="/detail?id=<%= fav.id %>">
                 <img src="<%= fav.image %>" alt="Favorite Character" class="character" />
+                 
               </a>
+               <p><strong>Wapen:</strong> <%= fav.weapon %></p>
+                <p><strong>Emote:</strong> <%= fav.emote %></p>
+                <form action="/favorite/delete" method="POST">
+                  <input type="hidden" name="id" value="<%= fav.id %>">
+                  <button type="submit" class="remove-button">X</button>
+                </form>
             </article>
           <% }) %>
         <% } else { %>
-          <p>Je hebt nog geen favorites toegevoegd.</p>
+          <p>Je hebt nog geen favorieten toegevoegd.</p>
         <% } %>
 
       </section>
     </section>
   </main>
 
-  <footer></footer>
+  <footer></footer> 
 
 </body>
 </html>

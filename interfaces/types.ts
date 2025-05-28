@@ -3,6 +3,8 @@ import { ObjectId } from "mongodb";
 export interface Favorite {
   id: string;
   image: string;
+  weapon: string;
+  emote: string;
 }
 
 export interface Blacklist {
@@ -16,5 +18,5 @@ export interface User {
   email: string;
   password: string;
   favorite: Favorite[];
-  blacklist: Blacklist[];
+  blacklist?: Blacklist[];
 }
