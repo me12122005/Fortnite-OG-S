@@ -821,3 +821,101 @@ img.character-blacklist {
     }
     
 
+/*reset en forgot password*/
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-image: url('../assets/images/fortnitebackground.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: white;
+
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+
+h2 {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-shadow: 0 0 8px rgba(0,0,0,0.7);
+}
+
+
+form {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+
+input[type="password"],
+input[type="email"],
+input[type="hidden"] {
+  width: 100%;
+  height: 45px;
+  padding: 0 15px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.85);
+  color: #000;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+
+input[type="hidden"] {
+  display: none;
+}
+
+
+button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 150px;
+}
+
+button:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 800px) {
+  form {
+    padding: 30px 20px;
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+}
