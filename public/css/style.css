@@ -162,74 +162,54 @@ h1{
 }
 
 /* css - login page*/
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+.fortnite-wrapper {
   background-image: url(../assets/images/fortnitebackground.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   min-height: 100vh;
-  color: white;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
 }
 
-/*header*/
-#header-login-page {
+.header-logo {
   display: flex;
   justify-content: center;
-  padding: 20px;
 }
 
 .fortnite-logo {
   height: 50vh;
-  max-width: 90%;
-  object-fit: contain;
 }
 
-
-main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-#form-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
+.login-container {
   background-color: rgba(0, 0, 0, 0.6);
-  padding: 40px;
+  padding: 40px 30px;
   border-radius: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   width: 100%;
   max-width: 400px;
-  margin-top: -40px;
-}
-
-
-#form-login-page {
   display: flex;
   flex-direction: column;
+  gap: 25px;
   align-items: center;
-  gap: 20px;
-  width: 100%;
 }
 
-#input-section {
+.input-group {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
   width: 100%;
 }
 
-#email,
-#password {
+.login-input {
   width: 100%;
   height: 45px;
   padding: 0 15px;
@@ -237,36 +217,38 @@ main {
   border-radius: 25px;
   font-size: 16px;
   font-weight: bold;
-  text-align: center;
   background: rgba(255, 255, 255, 0.85);
   color: #000;
+  text-align: center;
   transition: background 0.3s ease;
 }
 
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  gap: 20px;
+  width: 100%;
+}
 
-#login-button,
-#register-button {
+.login-btn,
+.register-btn {
   background-color: #000;
-  color: #fff;
-  border: none;
   border-radius: 25px;
-  padding: 12px 30px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  height: 40px;
   width: 150px;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
-#login-button:hover,
-#register-button:hover {
-  background-color: #333;
-  transform: translateY(-2px);
-}
-
-
-footer {
-  position: relative;
+.login-btn:hover,
+.register-btn:hover {
+  opacity: 0.6;
 }
 
 .supply-llama {
@@ -275,7 +257,6 @@ footer {
   bottom: -320px;
   right: -400px;
   z-index: 0;
-  transition: transform 0.3s ease;
 }
 
 @keyframes llama-jump {
@@ -289,7 +270,6 @@ footer {
   animation: llama-jump 0.5s ease-in-out;
 }
 
-
 @media (max-width: 800px) {
   .fortnite-logo {
     height: 40vh;
@@ -301,11 +281,13 @@ footer {
     right: -340px;
   }
 
-  #form-wrapper {
-    padding: 30px 20px;
-    width: 75%;
+  .button-group {
+    gap: 10px;
+    margin: 20px 0;
   }
 }
+
+
 
 /* css - game page*/
 .game-container {
@@ -346,6 +328,8 @@ footer {
     transition: transform 0.3s ease-in-out;
 }
 
+
+
 .thumbs img:hover, .score:hover {
     transform: scale(1.1);
 }
@@ -356,6 +340,20 @@ footer {
 
 
 /* css - library page*/
+body {
+  background-color: #121212;
+  color: white;
+  background-image: url(../assets/images/fortnitebackground.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
 .character-selection {
     margin-top: 60px;
 
@@ -760,39 +758,36 @@ img.character-blacklist {
 
 
 /* css - favorite page*/
-#character-details .character-details {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    background: #0000004d;
-    padding: 30px;
-    border-radius: 20px;
-    width: 85%;
-    height: 50rem;
-    margin: 30px auto;
-    border: #000000 1.5px solid;
-}
-
-
 .remove-button{
    color: red;
    display: block;
    margin: auto;
     font-size: 30px;
     font-weight: bold;
-    background: white;
+    background: rgba(65, 70, 129, 0.466);
     border: none;
     margin-top: 10px;
     border-radius: 5px;
-    width: 20vw;
+    padding: 15px;
+     cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+}
+.remove-button:hover{
+     transform: scale(0.9);
+}
+.character-card-form-favorite img{
+cursor: pointer;
 }
 
+.character-card-form-favorite button{
+   background: transparent;
+   border: none;
+}
 
-
-
-
-
+.character-card-form-favorite p {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+   font-size: 14px;
+}
 /* css - register page*/
 .registreren-h2{
     text-align: center;
@@ -821,8 +816,34 @@ img.character-blacklist {
     }
     
 
+    /* css - profile page*/
+    .profile-container{
+    text-align: center;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; 
+    line-height: 60px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    margin: 30px ;
+    border: #000000 1.5px solid;
+    }
+
+    .button-logout{
+    background-color: rgba(67, 147, 240, 0.733);
+     text-decoration: none;
+     padding: 20px;
+     border-radius: 25px;
+     border:solid black 1px;
+     margin-top: 15px;
+     color: black;
+    } 
+    
+    .button-logout:hover{
+     background-color: rgb(76, 204, 243);
+    }
+
 /*reset en forgot password*/
-body {
+.fortnite-wrapper {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background-image: url('../assets/images/fortnitebackground.jpg');
@@ -833,7 +854,6 @@ body {
   min-height: 100vh;
   color: white;
 
-  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -842,16 +862,14 @@ body {
   text-align: center;
 }
 
-
-h2 {
+.page-heading {
   font-weight: 700;
   font-size: 2rem;
   margin-bottom: 30px;
   text-shadow: 0 0 8px rgba(0,0,0,0.7);
 }
 
-
-form {
+.reset-form {
   background-color: rgba(0, 0, 0, 0.6);
   padding: 40px 30px;
   border-radius: 20px;
@@ -865,10 +883,7 @@ form {
   align-items: center;
 }
 
-
-input[type="password"],
-input[type="email"],
-input[type="hidden"] {
+.reset-input {
   width: 100%;
   height: 45px;
   padding: 0 15px;
@@ -882,13 +897,11 @@ input[type="hidden"] {
   transition: background 0.3s ease;
 }
 
-
-input[type="hidden"] {
+.hidden-input {
   display: none;
 }
 
-
-button {
+.submit-btn {
   background-color: #000;
   color: #fff;
   border: none;
@@ -902,19 +915,18 @@ button {
   max-width: 150px;
 }
 
-button:hover {
+.submit-btn:hover {
   background-color: #333;
   transform: translateY(-2px);
 }
 
-
 @media (max-width: 800px) {
-  form {
+  .reset-form {
     padding: 30px 20px;
     max-width: 90%;
   }
 
-  h2 {
+  .page-heading {
     font-size: 1.5rem;
     margin-bottom: 20px;
   }
